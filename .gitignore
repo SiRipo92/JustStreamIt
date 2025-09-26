@@ -16,3 +16,18 @@ db.sqlite3
 
 .coverage
 .pytest*
+
+
+# Databases / dumps
+*.sqlite3
+*.sqlite3-*
+*.sqlite3*
+*.db
+*.db.zip
+data/*.db
+data/*.zip
+
+# Django artifacts
+staticfiles/
+media/
+*.log
