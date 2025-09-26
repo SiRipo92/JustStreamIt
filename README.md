@@ -2,27 +2,83 @@
 
 Le projet OCMovies-API est une application web à exécuter localement dans le cadre de projets éducatifs. Cette application est implémentée sous la forme d'une API REST. Elle fournit des informations cinématographiques à partir d'urls interrogeables à l'aide d'un client HTTP graphique comme un navigateur web ou postman, ou d'un client HTTP programmatique comme requests en python ou fetch/axios en javascript. Les points d'entrée fournis par cette API de test sont consultables en lecture seule avec des points d'entrée limités aux requêtes GET.
 
+## Structure du Projet
+Ce dépôt contient :
+
+- backend/ : l’API Django REST OCMovies-API (lecture seule, endpoints GET).
+
+- frontend/ : l’interface web statique (Bootstrap + SCSS + JavaScript natif).
+
+**Node est utilisé uniquement pour l’environnement de développement (compilation SCSS, Autoprefixer, live-reload). Aucun framework JS n’est utilisé côté client.**
+
+```bash
+├─ backend/                 # API Django
+│  ├─ config/               # Projet Django (settings.py & urls.py)
+│  ├─ movies/               # admin.py, apps.py, models.py, etc...
+│  │  ├─ management         # create_db.py
+│  │  ├─ migrations/    
+│  ├─ api/v1                # Apps et endpoints
+│  │  ├─ genres/            # apps.py, filters.py, urls.py, views.py
+│  │  ├─ titles/            # apps.py, filters.py, urls.py, views.py, pagination.py   
+│  ├─ data/                 # Données locales (ex. movies.db.zip)
+│  └─ manage.py, Pipfile, requirements.txt, setup.cfg 
+
+├─ frontend/                # Frontend statique (Bootstrap + SCSS + JS)
+│  ├─ assets/
+│  │  ├─ img/               # Images (logo)
+│  │  ├─ fonts/             # Police Oswald (woff2/woff)
+│  │  └─ styles/            # SCSS source + CSS compilé
+│  │  └─ js/                # app.js and api.js
+│  ├─ index.html
+│  └─ gulpfile.js, package.json
+└─ README.md, .gitignore
+```
+
 ## Installation
 
 Cette API exécutable localement peut être installée en suivant les étapes décrites ci-dessous.
 
 ### Installation et exécution de l'application
 
-1. Clonez ce dépôt de code à l'aide de la commande `$ git clone https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR.git` (vous pouvez également télécharger une [archive zip](https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR/archive/refs/heads/master.zip))
-2. Rendez-vous depuis un terminal à la racine du répertoire ocmovies-api-fr avec la commande `$ cd ocmovies-api-fr`
-3. Créez un environnement virtuel pour le projet avec `$ python -m venv env` sous windows ou `$ python3 -m venv env` sous macos ou linux.
-4. Activez l'environnement virtuel avec `$ env\Scripts\activate` sous windows ou `$ source env/bin/activate` sous macos ou linux.
-5. Installez les dépendances du projet avec la commande `$ pip install -r requirements.txt`
-6. Créez et alimentez la base de données avec la commande `$ python manage.py create_db`
-7. Démarrez le serveur avec `$ python manage.py runserver`
+#### Prérequis
+- Python 3.11+ avec pip et venv 
+- Node.js 18+ avec npm
 
-Lorsque le serveur fonctionne, après l'étape 7 de la procédure, l'API OCMovies peut être interrogée à partir des points d'entrée commençant par l'url de base [http://localhost:8000/api/v1/](http://localhost:8000/api/v1/). Le point d'entrée principal permettant de consulter les films est [http://localhost:8000/api/v1/titles](http://localhost:8000/api/v1/titles/). Si vous accédez à cette url depuis un navigateur, ce dernier vous présentera une interface navigable servant de documentation et de laboratoire d'expérimentation. Vous trouverez également une documentation plus formelle en bas de ce README.
+1. **Récupérer le projet**
+   - Clonez ce dépôt de code à l'aide de la commande `$ git clone https://github.com/SiRipo92/JustStreamIt` (vous pouvez également télécharger une [archive zip](https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR/archive/refs/heads/master.zip))
+   - Placez-vous à la **racine** du projet (celle qui contient backend/ et frontend/).
+2. **Ouvrir deux terminaux** :
+   - Terminal A → frontend/ (Bootstrap/SCSS/JS, serveur de dev)
+   - Terminal B → backend/ (Django, API)
+3. **Backend (Terminal B)**
+   1. Aller dans `backend/`.
+   2. Créer l’environnement virtuel Python.
+   3. Activer l’environnement virtuel
+   - Windows : env\Scripts\activate 
+   - macOS/Linux : source env/bin/activate
+   4. Installer les dépendances : `pip install -r requirements.txt`
+   5. Placer le dataset **local** (non versionné) dans `backend/data/movies.db.zip.
+   6. Initialiser la base : `python manage.py create_db`
+   7. Lancer l’API : `python manage.py runserver → http://localhost:8000
+4. **Frontend (Terminal A)**
+   1. Aller dans `frontend/`.
+   2. Installer les dépendances : `npm install`
+   3. Démarrer le serveur de dev : `npm run dev → http://localhost:5500
+5. **Accès**
+    - Interface web : http://localhost:5500 (le frontend interroge l’API)
+    - API navigable : `http://localhost:8000/api/v1/titles/` (endpoints sous `http://localhost:8000/api/v1/)
+6. **Lancement ultérieurs**
+   - Backend : activer le venv puis `python manage.py runserver`. 
+   - Frontend : `npm run dev`.
 
-Les étapes 1 à 6 ne sont requises que pour l'installation initiale. Pour les lancements ultérieurs du serveur de l'API, il suffit d'exécuter les étapes 4 et 7 à partir du répertoire racine du projet.
+<blockquote>
+Node/Gulp sont utilisés uniquement pour la compilation SCSS et le live-reload pendant le développement. Plus tard, vous pourrez soit servir les fichiers compilés depuis Django (un seul serveur), soit livrer un dossier dist/ statique.
+</blockquote>
+
 
 ## Utilisation et documentation des points d'entrée
 
-Une fois que vous avez lancé le serveur, vous pouvez lire la documentation depuis un navigateur web par le biais de l'interface navigable disponible ici [http://localhost:8000/api/v1/titles/](http://localhost:8000/api/v1/titles/). Cette interface navigable vous sert à la fois de source de documentation et de laboratoire d'expérimentation. L'API actuelle ne fournit que les points d'entrée suivants. Tous ces points d'entrée sont en lecture seule et supportent exclusivement les requêtes HTTP utilisant la **méthode GET**: 
+Une fois que vous avez lancé les serveur, vous pouvez lire la documentation depuis un navigateur web par le biais de l'interface navigable disponible ici [http://localhost:8000/api/v1/titles/](http://localhost:8000/api/v1/titles/). Cette interface navigable vous sert à la fois de source de documentation et de laboratoire d'expérimentation. L'API actuelle ne fournit que les points d'entrée suivants. Tous ces points d'entrée sont en lecture seule et supportent exclusivement les requêtes HTTP utilisant la **méthode GET**: 
 
 - Rechercher et filtrer des films: [http://localhost:8000/api/v1/titles/](http://localhost:8000/api/v1/titles/). Vous pouvez tester directement chaque filtre en accédant à l'URL ci-dessus depuis un navigateur web. Les filtres disponibles sont:
 
