@@ -1,9 +1,71 @@
+// 1. Local font face
 @use "./fonts";
 
+// 2. Variables
+@use "./variables" as vars;
+
+// 3) Bootstrap (load once, pass overrides)
 @use "../../../node_modules/bootstrap/scss/bootstrap" with (
-  $font-family-sans-serif: ("Oswald", sans-serif),
-  $headings-font-family: ("Oswald", sans-serif)
+  $font-family-sans-serif: vars.$font-family-sans-serif,
+  $headings-font-family:   vars.$headings-font-family,
+
+  $red:                    vars.$red,
+  $dark:                   vars.$dark,
+
+  $btn-border-radius:      vars.$btn-radius,
+  $btn-border-radius-sm:   vars.$btn-radius,
+  $btn-border-radius-lg:   vars.$btn-radius
 );
 
-body { font-family: "Oswald", sans-serif; }
-h1, h2, h3, h4, h5, h6 { font-weight: 600; }
+// 4) Typography
+@use "./typography";
+
+// 5) Buttons
+@use "./buttons";
+
+
+// --- Layout shell: 80% width for header + main
+.site-wrap {
+  width: 80%;
+  margin-inline: auto;
+}
+
+// Header background + spacing tweaks
+.site-header {
+  background: var(--header-bg);
+  color: #fff;
+
+  .brand-title{
+    font-weight: 300;
+    font-size: 40px;
+    color: #fff;
+    margin: 0;
+  }
+}
+
+// --- Meilleur film block wrapper (bordered block)
+.best-block {
+  border: 6px solid #000;
+  padding: 1rem;
+  min-height: 350px;
+}
+
+// Poster image box with your aspect ratio
+.poster-box {
+  aspect-ratio: 295 / 285;
+  background: #f2f2f2;
+  border-radius: .5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.object-fit-cover { object-fit: cover; }
+
+// Overlay (for later cards)
+.card-overlay {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: .5rem .75rem;
+  color: #fff;
+  background: linear-gradient(to top, var(--overlay-bg), rgba(0,0,0,0));
+}

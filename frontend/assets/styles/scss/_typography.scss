@@ -1,0 +1,33 @@
+// Body font
+body { font-family: "Oswald", sans-serif; }
+
+// Header H1 next to logo
+.site-header .brand-title {
+  font-weight: 300;
+  font-size: 40px;
+  color: #fff;
+  margin: 0;
+}
+
+// Section H2
+h2.section-title {
+  color: var(--title-black);
+  font-weight: 600;   /* semibold */
+  font-size: 48px;
+  margin-bottom: .75rem;
+}
+
+// Best-block typography (H3 in that section)
+.best-block {
+  .best-title {
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+
+  .best-desc{
+    font-size: 28px;
+    font-weight: 200;
+    line-height: 1.1;
+  }
+}

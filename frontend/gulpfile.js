@@ -4,39 +4,40 @@ const sourcemaps = require("gulp-sourcemaps");
 const postcss = require("gulp-postcss");
 const autoprefixer = require("autoprefixer");
 const browserSync = require("browser-sync").create();
-const path = require("path"); // ← add this
+const path = require("path");
 
 const paths = {
   scssEntry: "assets/styles/scss/global.scss",
+  scssBase:  "assets/styles/scss",     // ← explicit base
   scssWatch: "assets/styles/scss/**/*.scss",
-  cssOut: "assets/styles/css",
+  cssOut:    "assets/styles/css",
   htmlWatch: "**/*.html",
-  jsWatch: "js/**/*.js",
+  jsWatch:   "assets/js/**/*.js",      // ← point to assets/js
 };
 
 function stylesDev() {
-  return src(paths.scssEntry)
+  return src(paths.scssEntry, { base: paths.scssBase }) // ← ensure base
     .pipe(sourcemaps.init())
     .pipe(
       sass({
         outputStyle: "expanded",
         quietDeps: true,
-        includePaths: [path.resolve(__dirname, "node_modules")], // ← absolute
+        includePaths: [path.resolve(__dirname, "node_modules")],
       }).on("error", sass.logError)
     )
     .pipe(postcss([autoprefixer()]))
-    .pipe(sourcemaps.write("."))
-    .pipe(dest(paths.cssOut))
+    .pipe(sourcemaps.write("."))       // writes .map next to CSS in cssOut
+    .pipe(dest(paths.cssOut))          // → assets/styles/css/global.css
     .pipe(browserSync.stream({ match: "**/*.css" }));
 }
 
 function stylesBuild() {
-  return src(paths.scssEntry)
+  return src(paths.scssEntry, { base: paths.scssBase })
     .pipe(
       sass({
         outputStyle: "compressed",
         quietDeps: true,
-        includePaths: [path.resolve(__dirname, "node_modules")], // ← absolute
+        includePaths: [path.resolve(__dirname, "node_modules")],
       }).on("error", sass.logError)
     )
     .pipe(postcss([autoprefixer()]))

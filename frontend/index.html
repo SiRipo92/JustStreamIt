@@ -9,209 +9,213 @@
     </head>
 
     <body>
-    <!-- Logo and H1 tag -->
-        <header>
-            <image id="logo" src="/assets/img/logo.png" alt="Site logo image"></image>
-                <h1>Vidéos à la demande</h1>
-        </header>
+        <!-- Logo and H1 tag -->
+    <header class="site-wrap site-header py-3" role="banner">
+      <div class="d-flex align-items-center
+                  justify-content-center justify-content-md-start
+                  gap-2 gap-md-5 ps-3 ps-md-4">
+        <img id="logo" src="assets/img/logo.png" alt="JustStreamIt" width="127" height="94">
+        <h1 class="brand-title m-0 d-none d-md-block">Vidéos à la demande</h1>
+      </div>
+    </header>
 
-    <!-- Meilleur Film Section / Best Film Section -->
-    <section id="meilleur-film">
-        <h2 class="section-title">Meilleur film</h2>
-        <div class="container border-black border-2">
-            <div class="img-container">
-                <!-- Insert image for retrieved film with the highest rank w/ votes here -->
+    <main class="site-wrap my-4" role="main">
+        <!-- Meilleur Film Section / Best Film Section -->
+        <section id="best-film" class="mb-5" aria-labelledby="best-heading">
+          <h2 id="best-heading" class="section-title my-5 ">Meilleur film</h2>
+
+          <article class="row g-4 align-items-stretch best-block">
+            <div class="col-12 col-lg-6">
+              <figure class="poster-box m-0 position-relative">
+                <img id="best-img" class="w-100 h-100 object-fit-cover" src="" alt="" loading="eager">
+              </figure>
             </div>
 
-            <div class="txt-container flex flex-column row-gap-2">
-                <h3 class="">
-                    <!-- Insert retrieved film's title here -->
-                </h3>
-                <p class="short-description">
-                    <!-- Insert retrieved film's (short) description here -->
-                </p>
+            <div class="col-12 col-lg-6 d-flex flex-column">
+              <h3 id="best-title" class="best-title mb-2"></h3>
+              <p id="best-desc" class="best-desc text-muted mb-3"></p>
 
-                <button class="primary-btn" onClick="">
-                    <!-- Insert button's dynamic "Voir plus" if collapsed or 'Voir moins' if opened here-->
-                    <!-- On click, button opens/closes modal for detailed film view -->
+              <button class="jsi-btn jsi-btn--primary align-self-end w-auto"
+                    type="button"
+                    aria-label="Afficher les détails"
+                    data-bs-toggle="modal"
+                    data-bs-target="#movieModal">
+              Détails
+            </button>
+            </div>
+          </article>
+        </section>
+
+        <!-- Films les mieux notés (genres mélangés) / Best rated films -->
+        <section>
+            <h2 class="section-title">Films les mieux notés</h2>
+            <div class="card-grid-wrapper">
+                <div class="film-card">
+                    <image>
+                        <!-- Insert image for retrieved film with the highest rank w/ votes here -->
+                        <!-- Grid layout:
+                            - Desktop: 3 cols x 2 rows
+                            - Tablet: 2 cols x 2 rows
+                            - Mobile: 1 col x 2 rows
+                         -->
+                    </image>
+                </div>
+
+                <div class="overlay-modal">
+                    <!-- 60% black opacity, white text -->
+                    <h3 class="overlay-heading">
+                        <!-- Film title, white text, size: 24px,   -->
+                    </h3>
+
+                    <button class="jsi-btn jsi-btn--dark" type="button"
+                            aria-label="Afficher les détails">
+                      Détails
+                    </button>
+
+                </div>
+
+                 <button class="jsi-btn jsi-btn--toggle" type="button"
+                        aria-controls="top-rated-grid" aria-expanded="false">
+                  Voir plus
                 </button>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Films les mieux notés (genres mélangés) / Best rated films -->
-    <section>
-        <h2 class="section-title">Films les mieux notés</h2>
-        <div class="card-grid-wrapper">
-            <div class="film-card">
-                <image>
-                    <!-- Insert image for retrieved film with the highest rank w/ votes here -->
-                    <!-- Grid layout:
-                        - Desktop: 3 cols x 2 rows
-                        - Tablet: 2 cols x 2 rows
-                        - Mobile: 1 col x 2 rows
-                     -->
-                </image>
-            </div>
+        <!-- Films - Genre 1 (Mystery) & no dropdown -->
+        <section>
+            <h2 class="section-title">Mystery</h2>
+            <div class="card-grid-wrapper">
+                <div class="film-card">
+                    <image>
+                        <!-- Insert image for retrieved film with the highest rank w/ votes here -->
+                        <!-- Grid layout: same as above-->
+                    </image>
+                </div>
 
-            <div class="overlay-modal">
-                <!-- 60% black opacity, white text -->
-                <h3 class="overlay-heading">
-                    <!-- Film title, white text, size: 24px,   -->
-                </h3>
+                <div class="overlay-modal">
+                    <!-- 60% black opacity, white text -->
+                    <h3 class="overlay-heading">
+                        <!-- Film title, white text, size: 24px,   -->
+                    </h3>
 
-                <button class="secondary-btn">
-                    <!-- Insert button's dynamic "Voir plus" if modal is opened or 'Voir moins' if modal is opened here-->
-                    <!-- On click, button opens/closes modal for detailed film view -->
+                    <button class="jsi-btn jsi-btn--dark" type="button"
+                            aria-label="Afficher les détails">
+                      Détails
+                    </button>
+                </div>
 
+                <button class="jsi-btn jsi-btn--toggle" type="button"
+                        aria-controls="top-rated-grid" aria-expanded="false">
+                  Voir plus
                 </button>
             </div>
+        </section>
 
-             <button class="primary-btn" onClick="">
-                    <!-- Insert button's dynamic "Voir plus" if collapsed or 'Voir moins' if opened here-->
-                    <!-- On click, button operates pagination and refreshes display with next set of cards -->
-             </button>
-        </div>
-    </section>
+        <!-- Films - Genre 2 (Action) & no dropdown -->
+        <section>
+            <h2 class="section-title">Action:</h2>
+            <div class="card-grid-wrapper">
+                <div class="film-card">
+                    <image>
+                        <!-- Insert image for retrieved film with the highest rank w/ votes here -->
+                        <!-- Grid layout: same as above-->
+                    </image>
+                </div>
 
-    <!-- Films - Genre 1 (Mystery) & no dropdown -->
-    <section>
-        <h2 class="section-title">Mystery</h2>
-        <div class="card-grid-wrapper">
-            <div class="film-card">
-                <image>
-                    <!-- Insert image for retrieved film with the highest rank w/ votes here -->
-                    <!-- Grid layout: same as above-->
-                </image>
-            </div>
+                <div class="overlay-modal">
+                    <!-- 60% black opacity, white text -->
+                    <h3 class="overlay-heading">
+                        <!-- Film title, white text, size: 24px,   -->
+                    </h3>
 
-            <div class="overlay-modal">
-                <!-- 60% black opacity, white text -->
-                <h3 class="overlay-heading">
-                    <!-- Film title, white text, size: 24px,   -->
-                </h3>
+                    <button class="jsi-btn jsi-btn--dark" type="button"
+                            aria-label="Afficher les détails">
+                      Détails
+                    </button>
+                </div>
 
-                <button class="secondary-btn">
-                    <!-- Insert button's dynamic "Voir plus" if modal is opened or 'Voir moins' if modal is opened here-->
-                    <!-- On click, button opens/closes modal for detailed film view -->
-
+                 <button class="jsi-btn jsi-btn--toggle" type="button"
+                        aria-controls="top-rated-grid" aria-expanded="false">
+                  Voir plus
                 </button>
             </div>
+        </section>
 
-            <button class="primary-btn" onClick="">
-                <!-- Insert button's dynamic "Voir plus" if collapsed or 'Voir moins' if opened here-->
-                <!-- On click, button operates pagination and refreshes display with next set of cards -->
-             </button>
-        </div>
-    </section>
+        <!-- Films - Sorting Frame by Category with dropdown -->
+        <section>
+            <h2 class="section-title">Autres:</h2>
 
-    <!-- Films - Genre 2 (Action) & no dropdown -->
-    <section>
-        <h2 class="section-title">Action:</h2>
-        <div class="card-grid-wrapper">
-            <div class="film-card">
-                <image>
-                    <!-- Insert image for retrieved film with the highest rank w/ votes here -->
-                    <!-- Grid layout: same as above-->
-                </image>
+            <!-- Dropdown menu to the right of H2, showing list of genre options -->
+            <div class="dropdown-menu">
+                <ul class="genres-list">
+                    <li class="genre-option"><!--Option 1 --></li>
+                </ul>
             </div>
 
-            <div class="overlay-modal">
-                <!-- 60% black opacity, white text -->
-                <h3 class="overlay-heading">
-                    <!-- Film title, white text, size: 24px,   -->
-                </h3>
+            <div class="card-grid-wrapper">
+                <div class="film-card">
+                    <image>
+                        <!-- Insert image for retrieved film with the highest rank w/ votes here -->
+                        <!-- Grid layout: same as above-->
+                    </image>
+                </div>
 
-                <button class="secondary-btn">
-                    <!-- Insert button's dynamic "Voir plus" if modal is opened or 'Voir moins' if modal is opened here-->
-                    <!-- On click, button opens/closes modal for detailed film view -->
+                <div class="overlay-modal">
+                    <!-- 60% black opacity, white text -->
+                    <h3 class="overlay-heading">
+                        <!-- Film title, white text, size: 24px,   -->
+                    </h3>
 
+                    <button class="jsi-btn jsi-btn--dark" type="button"
+                            aria-label="Afficher les détails">
+                      Détails
+                    </button>
+                </div>
+
+                <button class="jsi-btn jsi-btn--toggle" type="button"
+                        aria-controls="top-rated-grid" aria-expanded="false">
+                  Voir plus
                 </button>
             </div>
+        </section>
 
-             <button class="primary-btn" onClick="">
-                <!-- Insert button's dynamic "Voir plus" if collapsed or 'Voir moins' if opened here-->
-                <!-- On click, button operates pagination and refreshes display with next set of cards -->
-             </button>
-        </div>
-    </section>
+        <!-- Films - Sorting Frame 2 by Category with dropdown -->
+        <section>
+            <h2 class="section-title">Autres:</h2>
 
-    <!-- Films - Sorting Frame by Category with dropdown -->
-    <section>
-        <h2 class="section-title">Autres:</h2>
-
-        <!-- Dropdown menu to the right of H2, showing list of genre options -->
-        <div class="dropdown-menu">
-            <ul class="genres-list">
-                <li class="genre-option"><!--Option 1 --></li>
-            </ul>
-        </div>
-
-        <div class="card-grid-wrapper">
-            <div class="film-card">
-                <image>
-                    <!-- Insert image for retrieved film with the highest rank w/ votes here -->
-                    <!-- Grid layout: same as above-->
-                </image>
+            <!-- Dropdown menu to the right of H2, showing list of genre options -->
+            <div class="dropdown-menu">
+                <ul class="genres-list">
+                    <li class="genre-option"><!--Option 1 --></li>
+                </ul>
             </div>
 
-            <div class="overlay-modal">
-                <!-- 60% black opacity, white text -->
-                <h3 class="overlay-heading">
-                    <!-- Film title, white text, size: 24px,   -->
-                </h3>
+            <div class="card-grid-wrapper">
+                <div class="film-card">
+                    <image>
+                        <!-- Insert image for retrieved film with the highest rank w/ votes here -->
+                        <!-- Grid layout: same as above-->
+                    </image>
+                </div>
 
-                <button class="secondary-btn">
-                    <!-- Insert button's dynamic "Voir plus" if modal is opened or 'Voir moins' if modal is opened here-->
-                    <!-- On click, button opens/closes modal for detailed film view -->
+                <div class="overlay-modal">
+                    <!-- 60% black opacity, white text -->
+                    <h3 class="overlay-heading">
+                        <!-- Film title, white text, size: 24px,   -->
+                    </h3>
 
+                    <button class="jsi-btn jsi-btn--dark" type="button"
+                            aria-label="Afficher les détails">
+                      Détails
+                    </button>
+                </div>
+
+                <button class="jsi-btn jsi-btn--toggle" type="button"
+                        aria-controls="top-rated-grid" aria-expanded="false">
+                  Voir plus
                 </button>
             </div>
-
-             <button class="primary-btn" onClick="">
-                <!-- Insert button's dynamic "Voir plus" if collapsed or 'Voir moins' if opened here-->
-                <!-- On click, button operates pagination and refreshes display with next set of cards -->
-             </button>
-        </div>
-    </section>
-
-    <!-- Films - Sorting Frame 2 by Category with dropdown -->
-    <section>
-        <h2 class="section-title">Autres:</h2>
-
-        <!-- Dropdown menu to the right of H2, showing list of genre options -->
-        <div class="dropdown-menu">
-            <ul class="genres-list">
-                <li class="genre-option"><!--Option 1 --></li>
-            </ul>
-        </div>
-
-        <div class="card-grid-wrapper">
-            <div class="film-card">
-                <image>
-                    <!-- Insert image for retrieved film with the highest rank w/ votes here -->
-                    <!-- Grid layout: same as above-->
-                </image>
-            </div>
-
-            <div class="overlay-modal">
-                <!-- 60% black opacity, white text -->
-                <h3 class="overlay-heading">
-                    <!-- Film title, white text, size: 24px,   -->
-                </h3>
-
-                <button class="secondary-btn">
-                    <!-- Insert button's dynamic "Voir plus" if modal is opened or 'Voir moins' if modal is opened here-->
-                    <!-- On click, button opens/closes modal for detailed film view -->
-
-                </button>
-            </div>
-
-             <button class="primary-btn" onClick="">
-                <!-- Insert button's dynamic "Voir plus" if collapsed or 'Voir moins' if opened here-->
-                <!-- On click, button operates pagination and refreshes display with next set of cards -->
-             </button>
-        </div>
-    </section>
+        </section>
+    </main>
     </body>
 </html>

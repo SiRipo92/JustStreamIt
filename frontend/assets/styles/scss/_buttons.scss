@@ -1,0 +1,67 @@
+@use "./variables" as vars;
+@use "../../../node_modules/bootstrap/scss/mixins" as m;
+
+// Base project button (shared traits)
+.jsi-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  color: #fff;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: vars.$btn-radius;
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  transition: background-color .15s ease-in-out,
+              box-shadow .15s ease-in-out,
+              color .15s ease-in-out;
+
+  // Red details (short)
+  &--primary {
+    background-color: vars.$red;
+    border-color: vars.$red;
+    font-size: 16px;
+
+    &:hover   { filter: brightness(.9); }
+    &:active  { filter: brightness(.85); }
+    &:disabled { opacity: .65; cursor: not-allowed; }
+  }
+
+  // Dark details (short, smaller text)
+  &--dark {
+    background-color: vars.$dark;
+    border-color: vars.$dark;
+    font-size: 14px;
+    width: 80px;
+    height: 30px;
+
+    &:hover   { filter: brightness(1.1); }
+    &:active  { filter: brightness(1.2); }
+    &:disabled { opacity: .65; cursor: not-allowed; }
+  }
+
+  // Toggle: “Voir plus / Voir moins” (long red)
+  &--toggle {
+    background-color: vars.$red;
+    border-color: vars.$red;
+    font-size: 20px;
+    padding: .75rem 1.5rem;
+    width: auto;
+    min-width: 250px;
+
+    &:hover   { filter: brightness(.9); }
+    &:active  { filter: brightness(.85); }
+    &:disabled { opacity: .65; cursor: not-allowed; }
+  }
+
+  &:focus-visible {
+    outline: 2px dashed currentColor;
+    outline-offset: 2px;
+  }
+}
