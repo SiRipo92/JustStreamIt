@@ -3,49 +3,53 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="api-base" content="http://localhost:8000/api/v1">
         <title>JustStreamIt</title>
         <link rel="preload" href="assets/fonts/oswald-variablefont_wght-webfont.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="stylesheet" href="assets/styles/css/global.css">
     </head>
 
     <body>
-        <!-- Logo and H1 tag -->
-    <header class="site-wrap site-header py-3" role="banner">
+    <!-- Logo and H1 tag -->
+    <header class="site-wrap container-fluid site-header py-3" role="banner">
       <div class="d-flex align-items-center
                   justify-content-center justify-content-md-start
                   gap-2 gap-md-5 ps-3 ps-md-4">
-        <img id="logo" src="assets/img/logo.png" alt="JustStreamIt" width="127" height="94">
+        <img id="logo" class="mx-3" src="assets/img/logo.png" alt="JustStreamIt" width="127" height="94">
         <h1 class="brand-title m-0 d-none d-md-block">Vidéos à la demande</h1>
       </div>
     </header>
 
-    <main class="site-wrap my-4" role="main">
+    <main class="site-wrap container-fluid my-4" role="main">
         <!-- Meilleur Film Section / Best Film Section -->
         <section id="best-film" class="mb-5" aria-labelledby="best-heading">
-          <h2 id="best-heading" class="section-title my-5 ">Meilleur film</h2>
+          <h2 id="best-heading" class="section-title my-4 my-lg-5">Meilleur film</h2>
 
-          <article class="row g-4 align-items-stretch best-block">
-            <div class="col-12 col-lg-6">
-              <figure class="poster-box m-0 position-relative">
-                <img id="best-img" class="w-100 h-100 object-fit-cover" src="" alt="" loading="eager">
-              </figure>
-            </div>
+          <article class="best-block p-3 p-md-4 mt-3">
+              <div class="row best-grid gx-0 align-items-stretch">
+                <!-- 12 / 5 / 4 -->
+                <div class="col-12 col-md-4 ">
+                  <figure class="poster-box m-0 h-100">
+                    <img id="best-img" class="d-block w-100 h-100" src="" alt="" loading="eager" referrerpolicy="no-referrer">
+                  </figure>
+                </div>
 
-            <div class="col-12 col-lg-6 d-flex flex-column">
-              <h3 id="best-title" class="best-title mb-2"></h3>
-              <p id="best-desc" class="best-desc text-muted mb-3"></p>
+                <!-- 12 / 6 / 7  => sums to 11 at md+lg -->
+                <div class="col-12 col-md-7  best-textcol d-flex flex-column">
+                  <h3 id="best-title" class="best-title my-2"></h3>
+                  <p  id="best-desc"  class="best-desc text-muted mb-3"></p>
 
-              <button class="jsi-btn jsi-btn--primary align-self-end w-auto"
-                    type="button"
-                    aria-label="Afficher les détails"
-                    data-bs-toggle="modal"
-                    data-bs-target="#movieModal">
-              Détails
-            </button>
-            </div>
-          </article>
+                  <div class="best-cta text-center text-lg-end">
+                    <button class="jsi-btn jsi-btn--primary" type="button"
+                            aria-label="Afficher les détails"
+                            data-bs-toggle="modal" data-bs-target="#movieModal">
+                      Détails
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </article>
         </section>
-
         <!-- Films les mieux notés (genres mélangés) / Best rated films -->
         <section>
             <h2 class="section-title">Films les mieux notés</h2>
@@ -217,5 +221,8 @@
             </div>
         </section>
     </main>
+
+    <!-- App bootstrap: renders “Meilleur film” block -->
+    <script type="module" src="assets/js/app.js"></script>
     </body>
 </html>

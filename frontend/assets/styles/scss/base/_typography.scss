@@ -20,14 +20,22 @@ h2.section-title {
 // Best-block typography (H3 in that section)
 .best-block {
   .best-title {
-    font-size: 48px;
     font-weight: 600;
     line-height: 1.1;
+    font-size: clamp(30px, 4vw, 48px);
   }
-
-  .best-desc{
-    font-size: 28px;
+  .best-desc {
+    line-height: 1.4;
+    font-size: clamp(14px, 2.2vw, 28px);
+    margin-bottom: 1rem;
     font-weight: 200;
-    line-height: 1.1;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+
+    /* three lines on phones, scale up on larger screens */
+    -webkit-line-clamp: 3;
+    @media (min-width: 768px)  { -webkit-line-clamp: 4; }
+    @media (min-width: 992px)  { -webkit-line-clamp: 5; }
   }
 }

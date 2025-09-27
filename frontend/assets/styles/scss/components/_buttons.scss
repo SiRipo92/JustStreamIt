@@ -1,5 +1,5 @@
-@use "./variables" as vars;
-@use "../../../node_modules/bootstrap/scss/mixins" as m;
+@use "../base/variables" as vars;
+@use "sass:color";
 
 // Base project button (shared traits)
 .jsi-btn {
@@ -18,19 +18,32 @@
   user-select: none;
   cursor: pointer;
   padding: 1rem 2rem;
-  transition: background-color .15s ease-in-out,
-              box-shadow .15s ease-in-out,
-              color .15s ease-in-out;
+  transition:
+    background-color .25s ease,
+    border-color .25s ease,
+    color .25s ease,
+    opacity .25s ease,
+    box-shadow .25s ease,
+    transform .05s ease-in;
 
   // Red details (short)
   &--primary {
     background-color: vars.$red;
     border-color: vars.$red;
-    font-size: 16px;
+    font-size: clamp(16px, 2.5vw, 20px);
 
-    &:hover   { filter: brightness(.9); }
-    &:active  { filter: brightness(.85); }
+    &:hover   { background-color: #000; border: #000 solid 2px; }
+    &:active  { background-color: #000; border: #000 solid 2px; }
     &:disabled { opacity: .65; cursor: not-allowed; }
+
+    @media (min-width:700px) and (max-width:1280px){
+      width: 120px;
+      height: 40px;
+    }
+    @media (min-width:1280px){
+      width: 150px;
+      height: 80px;
+    }
   }
 
   // Dark details (short, smaller text)
@@ -41,8 +54,8 @@
     width: 80px;
     height: 30px;
 
-    &:hover   { filter: brightness(1.1); }
-    &:active  { filter: brightness(1.2); }
+    &:hover   { background-color: #fff; color: #000 }
+    &:active  { background-color: #fff; color: #000 }
     &:disabled { opacity: .65; cursor: not-allowed; }
   }
 
@@ -55,8 +68,8 @@
     width: auto;
     min-width: 250px;
 
-    &:hover   { filter: brightness(.9); }
-    &:active  { filter: brightness(.85); }
+    &:hover   { background-color: #000; border: #000 solid 2px; }
+    &:active  { background-color: #000; border: #000 solid 2px;}
     &:disabled { opacity: .65; cursor: not-allowed; }
   }
 
