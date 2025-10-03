@@ -1,374 +1,9 @@
 @charset "UTF-8";
-@font-face {
-  font-family: "Oswald", sans-serif;
-  src: url("../../../fonts/oswald-variablefont_wght-webfont.woff2") format("woff2"), url("../../../fonts/oswald-variablefont_wght-webfont.woff") format("woff");
-  font-weight: 200 700;
-  font-style: normal;
-  font-display: swap;
-}
 :root {
   --header-bg: #61787F;
   --overlay-bg: rgba(0,0,0,.6);
   --title-black: #000;
   --poster-bg: #e9ecef;
-}
-
-body {
-  font-family: "Oswald", sans-serif;
-}
-
-.site-header h1.brand-title {
-  font-weight: 300;
-  color: #fff;
-  margin: 0;
-}
-@media (min-width: 768px) and (max-width: 992px) {
-  .site-header h1.brand-title {
-    font-size: clamp(28px, 2.2vw, 40px);
-  }
-}
-
-h2.section-title {
-  color: var(--title-black);
-  font-weight: 600;
-  font-size: clamp(30px, 2.2vw, 48px);
-  margin-bottom: 0.75rem;
-}
-
-h3.best-title {
-  font-weight: 600;
-  line-height: 1.1;
-  font-size: clamp(30px, 4vw, 48px);
-}
-
-.best-desc {
-  line-height: 1.4;
-  font-size: clamp(14px, 2.2vw, 28px);
-  margin-bottom: 1rem;
-  font-weight: 200;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-}
-@media (min-width: 768px) {
-  .best-desc {
-    -webkit-line-clamp: 4;
-  }
-}
-@media (min-width: 992px) {
-  .best-desc {
-    -webkit-line-clamp: 5;
-  }
-}
-
-div.film-meta .bold-film-detail {
-  font-size: clamp(16px, 2.2vw, 24px);
-  line-height: 1.1;
-  font-weight: 600;
-}
-
-#mm-summary,
-#mm-summary-inline {
-  font-size: clamp(16px, 2.2vw, 24px);
-  line-height: 1.45;
-}
-
-.directors-block {
-  line-height: 1.1;
-  font-size: clamp(14px, 2.2vw, 22px);
-}
-.directors-block .directors-label {
-  font-weight: 600;
-}
-
-.modal-cast .actors-label {
-  font-weight: 600;
-  font-size: clamp(14px, 2.2vw, 18px);
-  line-height: 1.1;
-}
-.modal-cast .mm-actors,
-.modal-cast .actors-list {
-  font-weight: 300;
-  font-size: clamp(14px, 2.2vw, 18px);
-}
-
-@media (min-width: 992px) {
-  .modal-hero {
-    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-    grid-template-areas: "text poster";
-    -moz-column-gap: clamp(1rem, 3vw, 3rem);
-         column-gap: clamp(1rem, 3vw, 3rem);
-    align-items: stretch;
-  }
-  .text-col {
-    display: flex;
-    flex-direction: column;
-    align-self: stretch;
-    min-height: 100%;
-  }
-  .directors-block {
-    margin-top: auto;
-  }
-  .poster-col {
-    align-self: stretch;
-  }
-}
-.jsi-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  color: #fff;
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 25px;
-  font-weight: 500;
-  line-height: 1.2;
-  text-align: center;
-  vertical-align: middle;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-  cursor: pointer;
-  padding: 1rem 2rem;
-  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease, transform 0.05s ease-in;
-}
-.jsi-btn--primary {
-  background-color: #FA0B0B;
-  border-color: #FA0B0B;
-  font-size: clamp(16px, 2.5vw, 20px);
-}
-.jsi-btn--primary:hover {
-  background-color: #000;
-  border: #000 solid 2px;
-}
-.jsi-btn--primary:active {
-  background-color: #000;
-  border: #000 solid 2px;
-}
-.jsi-btn--primary:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-}
-@media (min-width: 700px) and (max-width: 1280px) {
-  .jsi-btn--primary {
-    width: 120px;
-    height: 40px;
-  }
-}
-@media (min-width: 1280px) {
-  .jsi-btn--primary {
-    width: 150px;
-    height: 80px;
-  }
-}
-.jsi-btn--dark {
-  background-color: #2D2C2C;
-  border-color: #2D2C2C;
-  font-size: 14px;
-  width: 80px;
-  height: 30px;
-}
-.jsi-btn--dark:hover {
-  background-color: #fff;
-  color: #000;
-}
-.jsi-btn--dark:active {
-  background-color: #fff;
-  color: #000;
-}
-.jsi-btn--dark:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-}
-.jsi-btn--toggle {
-  background-color: #FA0B0B;
-  border-color: #FA0B0B;
-  font-size: 20px;
-  padding: 0.75rem 1.5rem;
-  width: auto;
-  min-width: 250px;
-}
-.jsi-btn--toggle:hover {
-  background-color: #000;
-  border: #000 solid 2px;
-}
-.jsi-btn--toggle:active {
-  background-color: #000;
-  border: #000 solid 2px;
-}
-.jsi-btn--toggle:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-}
-.jsi-btn:focus-visible {
-  outline: 2px dashed currentColor;
-  outline-offset: 2px;
-}
-
-#best-film .best-block {
-  border: 6px solid #000;
-  padding: 1rem;
-  --best-h: clamp(340px, 38vw, 420px);
-}
-#best-film .best-grid {
-  display: flex;
-  -moz-column-gap: clamp(1rem, 2.5vw, 3rem);
-       column-gap: clamp(1rem, 2.5vw, 3rem);
-  row-gap: 0.75rem;
-}
-#best-film .poster-box {
-  height: var(--best-h);
-}
-#best-film .poster-box img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: center;
-     object-position: center;
-}
-@media (min-width: 320px) {
-  #best-film .poster-box img {
-    max-height: 400px;
-  }
-}
-@media (min-width: 992px) {
-  #best-film .poster-box img {
-    -o-object-fit: contain;
-       object-fit: contain;
-    -o-object-position: left center;
-       object-position: left center;
-    background: var(--poster-bg);
-  }
-}
-#best-film .best-textcol {
-  min-height: var(--best-h);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  gap: clamp(0.5rem, 1.5vw, 0.75rem);
-}
-@media (min-width: 1200px) {
-  #best-film .best-textcol {
-    padding-inline: clamp(1rem, 2.5vw, 3rem);
-  }
-}
-#best-film .best-cta {
-  text-align: center;
-}
-@media (min-width: 992px) {
-  #best-film .best-cta {
-    text-align: right;
-  }
-}
-#best-film .best-cta .jsi-btn--primary {
-  width: auto;
-  min-width: 160px;
-}
-@media (min-width: 1200px) {
-  #best-film .best-cta .jsi-btn--primary {
-    width: clamp(180px, 15%, 320px);
-  }
-}
-
-#movieModal {
-  /* Only your black border, no extra shadows/lines */
-}
-#movieModal .modal-content.jsi-modal {
-  border: 6px solid #000 !important;
-  box-shadow: none;
-}
-#movieModal .modal-footer {
-  border-top: 0;
-}
-#movieModal {
-  /* Vertical spacing between sections inside the modal */
-}
-#movieModal .modal-body {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(12px, 2vw, 20px);
-  padding: clamp(1rem, 2vw, 1.5rem);
-}
-#movieModal {
-  /* ---- HERO (TEXT + POSTER) AS GRID ---- */
-}
-#movieModal .modal-hero {
-  /* IMPORTANT: no fixed height here */
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-areas: "text" "summaryInline" "poster";
-  row-gap: clamp(12px, 2vw, 20px);
-}
-#movieModal .text-col {
-  grid-area: text;
-  min-width: 0;
-}
-#movieModal .modal-summary-inline {
-  grid-area: summaryInline;
-}
-#movieModal .poster-col {
-  grid-area: poster;
-}
-#movieModal .text-col, #movieModal .poster-col {
-  min-width: 0;
-}
-#movieModal {
-  /* Poster box: keep the poster under control, never overflow the modal */
-}
-#movieModal .poster-box {
-  width: 100%;
-  aspect-ratio: 227/334;
-  max-height: clamp(300px, 45vh, 420px);
-  background: var(--poster-bg);
-}
-#movieModal .poster-box img {
-  width: 100%;
-  height: 100%;
-  -o-object-position: center;
-     object-position: center;
-  -o-object-fit: cover;
-     object-fit: cover;
-  background: var(--poster-bg);
-}
-#movieModal {
-  /* Desktop ≥ lg: two columns (text | poster). Summary and cast sit BELOW the hero */
-}
-@media (min-width: 992px) {
-  #movieModal .modal-hero {
-    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-    grid-template-areas: "text poster";
-    -moz-column-gap: clamp(1rem, 3vw, 3rem);
-         column-gap: clamp(1rem, 3vw, 3rem);
-    align-items: start;
-  }
-  #movieModal .text-col {
-    display: flex;
-    flex-direction: column;
-  }
-  #movieModal .directors-block {
-    margin-top: auto;
-  }
-  #movieModal {
-    /* Show full poster but keep it inside a sensible height */
-  }
-  #movieModal .poster-box {
-    max-height: clamp(320px, 40vh, 420px);
-  }
-  #movieModal .poster-box img {
-    -o-object-fit: contain;
-       object-fit: contain;
-  }
-  #movieModal {
-    /* Space the blocks that live under the hero */
-  }
-  #movieModal .modal-summary {
-    margin-top: clamp(12px, 2vw, 20px);
-  }
-  #movieModal .modal-cast {
-    margin-top: clamp(8px, 1.5vw, 16px);
-  }
 }
 
 /*!
@@ -12352,6 +11987,454 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+@font-face {
+  font-family: "Oswald", sans-serif;
+  src: url("../../../fonts/oswald-variablefont_wght-webfont.woff2") format("woff2"), url("../../../fonts/oswald-variablefont_wght-webfont.woff") format("woff");
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+body {
+  font-family: "Oswald", sans-serif;
+}
+
+.site-header h1.brand-title {
+  font-weight: 300;
+  color: #fff;
+  margin: 0;
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .site-header h1.brand-title {
+    font-size: clamp(28px, 2.2vw, 40px);
+  }
+}
+
+h2.section-title {
+  color: var(--title-black);
+  font-weight: 600;
+  font-size: clamp(30px, 2.2vw, 48px);
+  margin-bottom: 0.75rem;
+}
+
+h3.best-title {
+  font-weight: 600;
+  line-height: 1.1;
+  font-size: clamp(30px, 4vw, 48px);
+}
+
+.best-desc {
+  line-height: 1.4;
+  font-size: clamp(14px, 2.2vw, 28px);
+  margin-bottom: 1rem;
+  font-weight: 200;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+@media (min-width: 768px) {
+  .best-desc {
+    -webkit-line-clamp: 4;
+  }
+}
+@media (min-width: 992px) {
+  .best-desc {
+    -webkit-line-clamp: 5;
+  }
+}
+
+div.film-meta .bold-film-detail {
+  font-size: clamp(16px, 2.2vw, 24px);
+  line-height: 1.1;
+  font-weight: 600;
+}
+
+#mm-summary,
+#mm-summary-inline {
+  font-size: clamp(16px, 2.2vw, 24px);
+  line-height: 1.45;
+}
+
+.directors-block {
+  line-height: 1.1;
+  font-size: clamp(14px, 2.2vw, 22px);
+}
+.directors-block .directors-label {
+  font-weight: 600;
+}
+
+.modal-cast .actors-label {
+  font-weight: 600;
+  font-size: clamp(14px, 2.2vw, 18px);
+  line-height: 1.1;
+}
+.modal-cast .mm-actors,
+.modal-cast .actors-list {
+  font-weight: 300;
+  font-size: clamp(14px, 2.2vw, 18px);
+}
+
+h3.overlay-title-sm {
+  font-weight: 600;
+  color: #fff;
+  font-size: clamp(16px, 3.5vw, 22px);
+  line-height: 1.15;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* max two lines */
+  overflow: hidden;
+}
+
+@media (min-width: 992px) {
+  .modal-hero {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    grid-template-areas: "text poster";
+    -moz-column-gap: clamp(1rem, 3vw, 3rem);
+         column-gap: clamp(1rem, 3vw, 3rem);
+    align-items: stretch;
+  }
+  .text-col {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    min-height: 100%;
+  }
+  .directors-block {
+    margin-top: auto;
+  }
+  .poster-col {
+    align-self: stretch;
+  }
+}
+.jsi-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: #fff;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 25px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease, transform 0.05s ease-in;
+}
+.jsi-btn--primary {
+  background-color: #FA0B0B;
+  border-color: #FA0B0B;
+  font-size: clamp(16px, 2.5vw, 20px);
+}
+.jsi-btn--primary:hover {
+  background-color: #000;
+  border: #000 solid 2px;
+}
+.jsi-btn--primary:active {
+  background-color: #000;
+  border: #000 solid 2px;
+}
+.jsi-btn--primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+@media (min-width: 700px) and (max-width: 1280px) {
+  .jsi-btn--primary {
+    width: 120px;
+    height: 40px;
+  }
+}
+@media (min-width: 1280px) {
+  .jsi-btn--primary {
+    width: 150px;
+    height: 80px;
+  }
+}
+.jsi-btn--dark {
+  background-color: #2D2C2C;
+  border-color: #2D2C2C;
+  font-size: clamp(14px, 2.2vw, 20px);
+  width: 80px;
+  height: 30px;
+}
+.jsi-btn--dark:hover {
+  background-color: #fff;
+  color: #000;
+}
+.jsi-btn--dark:active {
+  background-color: #fff;
+  color: #000;
+}
+.jsi-btn--dark:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+.jsi-btn--toggle {
+  background-color: #FA0B0B;
+  border-color: #FA0B0B;
+  font-size: clamp(14px, 2.2vw, 20px);
+  padding: 0.75rem 1.5rem;
+  width: auto;
+  min-width: 250px;
+}
+.jsi-btn--toggle:hover {
+  background-color: #FA0B0B;
+  border: #FA0B0B solid 2px;
+}
+.jsi-btn--toggle:active {
+  background-color: #FA0B0B;
+  border: #FA0B0B solid 2px;
+}
+.jsi-btn--toggle:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+.jsi-btn--overlay {
+  background-color: #2D2C2C;
+  border-color: #2D2C2C;
+  border-radius: 25px;
+  padding: clamp(0.45rem, 2.2vw, 0.75rem) clamp(0.75rem, 2.2vw, 1rem);
+  font-size: clamp(14px, 2.2vw, 20px);
+  white-space: nowrap;
+}
+.jsi-btn--overlay:hover {
+  filter: brightness(1.1);
+}
+.jsi-btn--overlay:active {
+  transform: translateY(1px);
+}
+.jsi-btn--overlay:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+.jsi-btn:focus-visible {
+  outline: 2px dashed currentColor;
+  outline-offset: 2px;
+}
+
+.jsi-btn--overlay {
+  background-color: #2D2C2C;
+  border-color: #2D2C2C;
+}
+
+#best-film .best-block {
+  border: 6px solid #000;
+  padding: 1rem;
+  --best-h: clamp(340px, 38vw, 420px);
+}
+#best-film .best-grid {
+  display: flex;
+  -moz-column-gap: clamp(1rem, 2.5vw, 3rem);
+       column-gap: clamp(1rem, 2.5vw, 3rem);
+  row-gap: 0.75rem;
+}
+#best-film .poster-box {
+  height: var(--best-h);
+}
+#best-film .poster-box img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+@media (min-width: 320px) {
+  #best-film .poster-box img {
+    max-height: 400px;
+  }
+}
+@media (min-width: 992px) {
+  #best-film .poster-box img {
+    -o-object-fit: contain;
+       object-fit: contain;
+    -o-object-position: center;
+       object-position: center;
+    background: var(--poster-bg);
+  }
+}
+#best-film .best-textcol {
+  min-height: var(--best-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: clamp(0.5rem, 1.5vw, 0.75rem);
+}
+@media (min-width: 1200px) {
+  #best-film .best-textcol {
+    padding-inline: clamp(1rem, 2.5vw, 3rem);
+  }
+}
+#best-film .best-cta {
+  text-align: center;
+}
+@media (min-width: 992px) {
+  #best-film .best-cta {
+    text-align: right;
+  }
+}
+#best-film .best-cta .jsi-btn--primary {
+  width: auto;
+  min-width: 160px;
+}
+@media (min-width: 1200px) {
+  #best-film .best-cta .jsi-btn--primary {
+    width: clamp(180px, 15%, 320px);
+  }
+}
+
+#movieModal {
+  /* Only your black border, no extra shadows/lines */
+}
+#movieModal .modal-content.jsi-modal {
+  border: 6px solid #000 !important;
+  box-shadow: none;
+}
+#movieModal .modal-footer {
+  border-top: 0;
+}
+#movieModal {
+  /* Vertical spacing between sections inside the modal */
+}
+#movieModal .modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 2vw, 20px);
+  padding: clamp(1rem, 2vw, 1.5rem);
+}
+#movieModal {
+  /* ---- HERO (TEXT + POSTER) AS GRID ---- */
+}
+#movieModal .modal-hero {
+  /* IMPORTANT: no fixed height here */
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: "text" "summaryInline" "poster";
+  row-gap: clamp(12px, 2vw, 20px);
+}
+#movieModal .text-col {
+  grid-area: text;
+  min-width: 0;
+}
+#movieModal .modal-summary-inline {
+  grid-area: summaryInline;
+}
+#movieModal .poster-col {
+  grid-area: poster;
+}
+#movieModal .text-col, #movieModal .poster-col {
+  min-width: 0;
+}
+#movieModal {
+  /* Poster box: keep the poster under control, never overflow the modal */
+}
+#movieModal .poster-box {
+  width: 100%;
+  aspect-ratio: 227/334;
+  max-height: clamp(300px, 45vh, 420px);
+  background: var(--poster-bg);
+}
+#movieModal .poster-box img {
+  width: 100%;
+  height: 100%;
+  -o-object-position: center;
+     object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background: var(--poster-bg);
+}
+#movieModal {
+  /* Desktop ≥ lg: two columns (text | poster). Summary and cast sit BELOW the hero */
+}
+@media (min-width: 992px) {
+  #movieModal .modal-hero {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    grid-template-areas: "text poster";
+    -moz-column-gap: clamp(1rem, 3vw, 3rem);
+         column-gap: clamp(1rem, 3vw, 3rem);
+    align-items: start;
+  }
+  #movieModal .text-col {
+    display: flex;
+    flex-direction: column;
+  }
+  #movieModal .directors-block {
+    margin-top: auto;
+  }
+  #movieModal {
+    /* Show full poster but keep it inside a sensible height */
+  }
+  #movieModal .poster-box {
+    max-height: clamp(320px, 40vh, 420px);
+  }
+  #movieModal .poster-box img {
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
+  #movieModal {
+    /* Space the blocks that live under the hero */
+  }
+  #movieModal .modal-summary {
+    margin-top: clamp(12px, 2vw, 20px);
+  }
+  #movieModal .modal-cast {
+    margin-top: clamp(8px, 1.5vw, 16px);
+  }
+}
+
+.film-card .poster-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 227/334;
+  background: var(--poster-bg, #f1f3f5);
+  overflow: hidden;
+}
+.film-card .poster-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.film-card .film-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 15%;
+  height: 35%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.5rem, 2vw, 3rem) clamp(2rem, 2.2vw, 4rem);
+  z-index: 2;
+  pointer-events: none;
+}
+.film-card .overlay-top {
+  display: flex;
+  align-items: flex-start;
+}
+.film-card .overlay-bottom {
+  display: flex;
+  margin-top: auto;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding-bottom: clamp(8px, 1.8vw, 12px);
+}
+.film-card .overlay-bottom .jsi-btn {
+  pointer-events: auto;
+}
+@media (hover: hover) {
+  .film-card:hover .film-overlay {
+    background: rgba(0, 0, 0, 0.6);
+  }
+}
+
 .site-wrap {
   width: 80%;
   margin-inline: auto;
@@ -12375,15 +12458,5 @@ section {
   font-size: 40px;
   color: #fff;
   margin: 0;
-}
-
-.card-overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0.5rem 0.75rem;
-  color: #fff;
-  background: linear-gradient(to top, var(--overlay-bg), rgba(0, 0, 0, 0));
 }
 /*# sourceMappingURL=global.css.map */

@@ -1,5 +1,5 @@
-import { movieDetail } from './api.js';
-import { FALLBACK_SVG_DATA, viaProxy } from './poster.js';
+import { movieDetail, descriptionFor } from './api.js';
+import { FALLBACK_SVG_DATA, viaProxy } from './posters.js';
 
 // tiny helpers
 const $ = id => document.getElementById(id);
@@ -125,23 +125,9 @@ function fmtGross(detail) {
   }
 }
 
-// fetch detail (uses provided url when present; else /titles/<id>/?format=json)
-async function fetchDetail(movieOrId) {
-  const id = typeof movieOrId === 'object' ? movieOrId.id : movieOrId;
-  if (!id) throw new Error('openMovieModal: no movie id provided');
-
-  let url = (typeof movieOrId === 'object' && movieOrId.url)
-    ? movieOrId.url
-    : `${API_BASE}/titles/${id}/`;
-  if (!url.includes('?')) url += '?format=json';
-
-  const res = await fetch(url, { headers: { Accept: 'application/json' } });
-  if (!res.ok) throw new Error(`Detail fetch failed: ${res.status}`);
-  return res.json();
-}
 
 // ---- Render modal ----
-function fillModal(detail) {
+function fillModal(detail, summaryText) {
   // title
   setText('movieModalTitle', detail?.title || '');
 
@@ -154,9 +140,9 @@ function fillModal(detail) {
   }
 
   // summary (both placements)
-  const summary = detail?.long_description || detail?.description || '';
-  setText('mm-summary', summary);
-  setText('mm-summary-inline', summary);
+  const safeSummary = summaryText ?? (detail?.long_description || detail?.description || '');
+  setText('mm-summary', safeSummary);
+  setText('mm-summary-inline', safeSummary);
 
   // meta block
   setText('mm-year-genres',   fmtYearGenres(detail));
@@ -173,8 +159,9 @@ function fillModal(detail) {
 // ---- Public facing API
 export async function openMovieModal(movieOrId) {
   try {
-    const detail = await fetchDetail(movieOrId);
-    fillModal(detail);
+    const detail = await movieDetail(movieOrId);
+    const summary = await descriptionFor(detail);
+    fillModal(detail, summary);
 
     const modalEl = $('movieModal');
     const modal = window.bootstrap?.Modal.getOrCreateInstance(modalEl, { backdrop: true });

@@ -1,9 +1,4 @@
-// Imports base files directly
-@use "base/fonts";
 @use "base/variables" as vars;
-@use "base/typography";
-@use "components/components"; // Buttons
-@use "templates/templates";  // Templates for Sections
 
 @use "../../../node_modules/bootstrap/scss/bootstrap" with (
   $font-family-sans-serif: vars.$font-family-sans-serif,
@@ -12,11 +7,16 @@
   $red:                    vars.$red,
   $dark:                   vars.$dark,
 
-
   $btn-border-radius:      vars.$btn-radius,
   $btn-border-radius-sm:   vars.$btn-radius,
   $btn-border-radius-lg:   vars.$btn-radius
 );
+
+// Imports base files directly
+@use "base/fonts";
+@use "base/typography";
+@use "components/buttons"; // Buttons
+@use "templates/templates";  // Templates for Sections
 
 // --- Site shell: 80% wrapper
 .site-wrap {
@@ -48,11 +48,3 @@ section {
   }
 }
 
-// Overlay (for later cards)
-.card-overlay {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  padding: .5rem .75rem;
-  color: #fff;
-  background: linear-gradient(to top, var(--overlay-bg), rgba(0,0,0,0));
-}

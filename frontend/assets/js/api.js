@@ -1,5 +1,53 @@
 import { API_BASE } from './config.js';
 
+
+// --------------------------- Globally scoped variables
+const PLACEHOLDER_PATTERNS = [
+  /^\|+$/,            // just pipes
+  /^-+$/,             // just dashes
+  /^—+$/,             // em-dashes
+  /^add a plot/i,     // "Add a Plot »"
+  /^n\/?a$/i,         // N/A / NA
+  /^unknown$/i,
+];
+
+// --------------------------- Helper functions
+
+// tiny helpers
+function norm(t) {
+  return String(t ?? '').replace(/\s+/g, ' ').trim();
+}
+
+function isMeaningful(t) {
+  const s = norm(t);
+  if (!s) return false;
+  return !PLACEHOLDER_PATTERNS.some(re => re.test(s));
+}
+
+/**
+ * Returns the best human-friendly description string.
+ * - Prefer a meaningful long_description, else description.
+ * - If fields exist but are placeholders (like "|" / "Add a Plot »"): "Film description does not currently exist."
+ * - If nothing provided at all: "Description data is missing."
+ */
+export function sanitizeDescriptionFields(d) {
+  const long = d?.long_description;
+  const short = d?.description;
+
+  const anyProvided =
+    norm(long).length > 0 || norm(short).length > 0;
+
+  const good =
+    (isMeaningful(long) && norm(long)) ||
+    (isMeaningful(short) && norm(short));
+
+  if (good) return good;
+  if (anyProvided) return 'Film description does not currently exist.';
+  return 'Description data is missing.';
+}
+
+
+
 // Generic JSON fetch with basic error handling
 export async function getJSON(url, opt = {}) {
   const res = await fetch(url, {
@@ -14,7 +62,9 @@ export async function getJSON(url, opt = {}) {
   return res.json();
 }
 
-// Build a detail URL from an item or id. Always ensures ?format=json.
+// --------------------------- Api call functions
+
+// GETTERS FOR SINGLE FILM DETAILS
 export function detailUrlFrom(itemOrId) {
   if (typeof itemOrId === 'object' && itemOrId?.url && itemOrId.url.startsWith('http')) {
     const u = new URL(itemOrId.url);
@@ -43,11 +93,20 @@ export function movieDetail(itemOrId, { signal } = {}) {
 
 // Get description for an item: inline if present, else fetch detail.
 export async function descriptionFor(item, { signal } = {}) {
-  const inline =
-    item?.long_description?.trim?.() ||
-    item?.description?.trim?.();
-  if (inline) return inline;
+  const first = sanitizeDescriptionFields(item);
+  // If we already have a meaningful description, stop here.
+  if (
+    first !== 'La description du film n'existe pas actuellement.' &&
+    first !== 'Les données descriptives sont manquantes.'
+  ) {
+    return first;
+  }
 
-  const d = await movieDetail(item, { signal });
-  return d.long_description?.trim?.() || d.description?.trim?.() || '';
- }
+  // Try detail endpoint in case it has a better summary.
+  try {
+    const d = await movieDetail(item, { signal });
+    return sanitizeDescriptionFields(d);
+  } catch {
+    return first;
+  }
+}

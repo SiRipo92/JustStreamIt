@@ -28,7 +28,7 @@ Ce dépôt contient :
 │  │  ├─ img/               # Images (logo)
 │  │  ├─ fonts/             # Police Oswald (woff2/woff)
 │  │  └─ styles/            # SCSS source + CSS compilé
-│  │  └─ js/                # app.js, api.js, poster.js, modal.js
+│  │  └─ js/                # app.js, api.js, posters.js, modal.js
 │  ├─ index.html
 │  └─ gulpfile.js, package.json
 └─ README.md, .gitignore
