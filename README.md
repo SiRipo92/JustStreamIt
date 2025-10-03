@@ -28,7 +28,7 @@ Ce dépôt contient :
 │  │  ├─ img/               # Images (logo)
 │  │  ├─ fonts/             # Police Oswald (woff2/woff)
 │  │  └─ styles/            # SCSS source + CSS compilé
-│  │  └─ js/                # app.js and api.js
+│  │  └─ js/                # app.js, api.js, poster.js, modal.js
 │  ├─ index.html
 │  └─ gulpfile.js, package.json
 └─ README.md, .gitignore
@@ -59,7 +59,7 @@ Cette API exécutable localement peut être installée en suivant les étapes d�
    4. Installer les dépendances : `pip install -r requirements.txt`
    5. Placer le dataset **local** (non versionné) dans `backend/data/movies.db.zip.
    6. Initialiser la base : `python manage.py create_db`
-   7. Lancer l’API : `python manage.py runserver → http://localhost:8000
+   7. Lancer l’API : `python manage.py runserver` → http://localhost:8000
 4. **Frontend (Terminal A)**
    1. Aller dans `frontend/`.
    2. Installer les dépendances : `npm install`
