@@ -12,30 +12,91 @@ body { font-family: "Oswald", sans-serif; }
 // Section H2
 h2.section-title {
   color: var(--title-black);
-  font-weight: 600;   /* semibold */
+  font-weight: 600;
   font-size: 48px;
   margin-bottom: .75rem;
 }
 
 // Best-block typography (H3 in that section)
-.best-block {
-  .best-title {
-    font-weight: 600;
+h3.best-title {
+  font-weight: 600;
+  line-height: 1.1;
+  font-size: clamp(30px, 4vw, 48px);
+}
+.best-desc {
+  line-height: 1.4;
+  font-size: clamp(14px, 2.2vw, 28px);
+  margin-bottom: 1rem;
+  font-weight: 200;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  // three lines on phones, scale up on larger screens
+  -webkit-line-clamp: 3;
+  @media (min-width: 768px)  { -webkit-line-clamp: 4; }
+  @media (min-width: 992px)  { -webkit-line-clamp: 5; }
+}
+
+div.film-meta{
+  .bold-film-detail{
+    font-size: clamp(16px, 2.2vw, 24px);
     line-height: 1.1;
-    font-size: clamp(30px, 4vw, 48px);
-  }
-  .best-desc {
-    line-height: 1.4;
-    font-size: clamp(14px, 2.2vw, 28px);
-    margin-bottom: 1rem;
-    font-weight: 200;
-
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-
-    /* three lines on phones, scale up on larger screens */
-    -webkit-line-clamp: 3;
-    @media (min-width: 768px)  { -webkit-line-clamp: 4; }
-    @media (min-width: 992px)  { -webkit-line-clamp: 5; }
+    font-weight: 600;
   }
 }
+
+#mm-summary,
+#mm-summary-inline {
+  font-size: clamp(16px, 2.2vw, 24px);
+  line-height: 1.45;
+}
+
+.directors-block{
+  line-height: 1.1;
+  font-size: clamp(14px, 2.2vw, 22px);
+  .directors-label{
+    font-weight: 600;
+  }
+}
+
+.modal-cast{
+  .actors-label{
+    font-weight: 600;
+    font-size: clamp(14px, 2.2vw, 18px);
+    line-height: 1.1;
+  }
+  .mm-actors,
+  .actors-list{
+    font-weight: 300;
+    font-size: clamp(14px, 2.2vw, 18px);
+  }
+}
+
+
+// Media Queries
+
+// Desktop Block
+@media (min-width: 992px) {
+  .modal-hero {
+    // two columns; no fixed height; both items stretch to the tallest
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    grid-template-areas: "text poster";
+    column-gap: clamp(1rem, 3vw, 3rem);
+    align-items: stretch; // Ensures equal column heights
+  }
+
+  .text-col {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;  // Matches poster column height
+    min-height: 100%;
+  }
+
+  .directors-block {
+    margin-top: auto;  // pushes block to the bottom
+  }
+
+  .poster-col { align-self: stretch; }
+}
+
+
+

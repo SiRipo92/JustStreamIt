@@ -1,5 +1,5 @@
 // ------------------------------
-// Best Film section (matches your HTML)
+// Best Film section
 // ------------------------------
 #best-film {
   .best-block {
@@ -24,7 +24,7 @@
       @media (min-width: 992px) {
         object-fit: contain;
         object-position: left center;
-        background: #f2f2f2;
+        background: var(--poster-bg);
       }
     }
   }

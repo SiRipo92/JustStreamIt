@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,6 +21,7 @@
     </header>
 
     <main class="site-wrap container-fluid my-4" role="main">
+
         <!-- Meilleur Film Section / Best Film Section -->
         <section id="best-film" class="mb-5" aria-labelledby="best-heading">
           <h2 id="best-heading" class="section-title my-4 my-lg-5">Meilleur film</h2>
@@ -40,9 +41,13 @@
                   <p  id="best-desc"  class="best-desc text-muted mb-3"></p>
 
                   <div class="best-cta text-center text-lg-end">
-                    <button class="jsi-btn jsi-btn--primary" type="button"
-                            aria-label="Afficher les détails"
-                            data-bs-toggle="modal" data-bs-target="#movieModal">
+                    <button
+                            class="jsi-btn jsi-btn--primary"
+                            id="best-details-btn"
+                            type="button"
+                            aria-haspopup="dialog"
+                            aria-controls="movieModal"
+                            aria-label="Afficher les détails">
                       Détails
                     </button>
                   </div>
@@ -182,46 +187,73 @@
                 </button>
             </div>
         </section>
-
-        <!-- Films - Sorting Frame 2 by Category with dropdown -->
-        <section>
-            <h2 class="section-title">Autres:</h2>
-
-            <!-- Dropdown menu to the right of H2, showing list of genre options -->
-            <div class="dropdown-menu">
-                <ul class="genres-list">
-                    <li class="genre-option"><!--Option 1 --></li>
-                </ul>
-            </div>
-
-            <div class="card-grid-wrapper">
-                <div class="film-card">
-                    <image>
-                        <!-- Insert image for retrieved film with the highest rank w/ votes here -->
-                        <!-- Grid layout: same as above-->
-                    </image>
-                </div>
-
-                <div class="overlay-modal">
-                    <!-- 60% black opacity, white text -->
-                    <h3 class="overlay-heading">
-                        <!-- Film title, white text, size: 24px,   -->
-                    </h3>
-
-                    <button class="jsi-btn jsi-btn--dark" type="button"
-                            aria-label="Afficher les détails">
-                      Détails
-                    </button>
-                </div>
-
-                <button class="jsi-btn jsi-btn--toggle" type="button"
-                        aria-controls="top-rated-grid" aria-expanded="false">
-                  Voir plus
-                </button>
-            </div>
-        </section>
     </main>
 
+    <!-- Movie details modal (Bootstrap) -->
+    <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content jsi-modal">
+          <div class="modal-body">
+            <!-- Top block: text left / poster right (CSS Grid, no .row/.gx) -->
+            <div class="modal-hero">
+              <!-- Text column -->
+              <div class="text-col d-flex flex-column">
+                <h3 id="movieModalTitle" class="best-title mb-3"></h3>
+
+                <div class="film-meta">
+                  <p id="mm-year-genres" class="bold-film-detail mb-1"></p>
+                  <p id="mm-rated-runtime" class="bold-film-detail mb-1"></p>
+                  <p class="bold-film-detail mb-1">
+                    <span class="label">IMDB score:&nbsp;</span><span id="mm-imdb"></span>
+                  </p>
+                  <p class="bold-film-detail mb-1">
+                    <span class="label">Recettes au box-office:&nbsp;</span>
+                      <span id="mm-boxoffice"></span>
+                  </p>
+                </div>
+
+                <div class="directors-block pt-3">
+                  <p class="directors-label mb-1">Réalisé par:</p>
+                  <p id="mm-directors" class="director-names mb-0"></p>
+                </div>
+
+                <!-- MOBILE/TABLET-ONLY summary (between meta+directors and the poster) -->
+                <div class="modal-summary-inline d-lg-none">
+                  <p id="mm-summary-inline" class="mb-0"></p>
+                </div>
+              </div>
+
+              <!-- Poster column -->
+              <div class="poster-col">
+                <figure class="poster-box m-0 h-100">
+                  <img id="mm-poster" class="d-block w-100 h-100" alt="" referrerpolicy="no-referrer">
+                </figure>
+              </div>
+            </div>
+
+            <!-- DESKTOP summary (full width, shows >= lg) -->
+            <div class="modal-summary d-none d-lg-block">
+              <p id="mm-summary" class="mb-0"></p>
+            </div>
+
+            <!-- Cast -->
+            <div class="modal-cast">
+              <p class="actors-label mb-1">Avec:</p>
+              <p id="mm-actors" class="actors-list mb-0"></p>
+            </div>
+          </div>
+
+          <div class="modal-footer justify-content-center">
+            <button type="button" class="jsi-btn jsi-btn--toggle" data-bs-dismiss="modal" aria-label="Fermer la fenêtre modale">
+              Fermer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3rd-party runtime (UMD: exposes window.bootstrap and includes Popper) -->
+    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
     <!-- App bootstrap: renders “Meilleur film” block -->
     <script type="module" src="assets/js/app.js"></script>
     </body>
