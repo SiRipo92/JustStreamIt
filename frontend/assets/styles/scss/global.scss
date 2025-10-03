@@ -29,6 +29,12 @@
   }
 }
 
+// section spacing
+section {
+    margin-top: clamp(5rem,2.2vw,8rem);
+    margin-bottom: clamp(5rem,2.2vw,8rem);
+}
+
 // --- Header
 .site-header {
   background: var(--header-bg);

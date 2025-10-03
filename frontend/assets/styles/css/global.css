@@ -17,17 +17,21 @@ body {
   font-family: "Oswald", sans-serif;
 }
 
-.site-header .brand-title {
+.site-header h1.brand-title {
   font-weight: 300;
-  font-size: 40px;
   color: #fff;
   margin: 0;
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .site-header h1.brand-title {
+    font-size: clamp(28px, 2.2vw, 40px);
+  }
 }
 
 h2.section-title {
   color: var(--title-black);
   font-weight: 600;
-  font-size: 48px;
+  font-size: clamp(30px, 2.2vw, 48px);
   margin-bottom: 0.75rem;
 }
 
@@ -12355,6 +12359,11 @@ textarea.form-control-lg {
 .site-wrap .container-fluid {
   padding-left: 0;
   padding-right: 0;
+}
+
+section {
+  margin-top: clamp(5rem, 2.2vw, 8rem);
+  margin-bottom: clamp(5rem, 2.2vw, 8rem);
 }
 
 .site-header {
