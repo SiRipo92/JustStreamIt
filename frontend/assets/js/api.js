@@ -1,38 +1,53 @@
-const API_BASE = "http://localhost:8000/api/v1";
+import { API_BASE } from './config.js';
 
 // Generic JSON fetch with basic error handling
-async function getJSON(url, { signal } = {}) {
+export async function getJSON(url, opt = {}) {
   const res = await fetch(url, {
-    headers: { Accept: "application/json" },
-    signal,
-    credentials: "omit",
+    headers: { Accept: 'application/json' },
+    credentials: 'omit',
+    ...opt,
   });
   if (!res.ok) {
-    const txt = await res.text().catch(() => "");
+    const txt = await res.text().catch(() => '');
     throw new Error(`HTTP ${res.status} ${res.statusText} – ${txt.slice(0, 200)}`);
   }
   return res.json();
 }
 
-// Helper to resolve detail URL for a list item (API provides `url`)
-function detailUrlFromItem(item) {
-  if (item?.url && item.url.startsWith("http")) return item.url;
-  if (item?.id != null) return `${API_BASE}/titles/${item.id}/`;
-  throw new Error("Cannot resolve detail URL");
+// Build a detail URL from an item or id. Always ensures ?format=json.
+export function detailUrlFrom(itemOrId) {
+  if (typeof itemOrId === 'object' && itemOrId?.url && itemOrId.url.startsWith('http')) {
+    const u = new URL(itemOrId.url);
+    if (!u.searchParams.has('format')) u.searchParams.set('format', 'json');
+    return u.toString();
+  }
+  if (typeof itemOrId === 'object' && itemOrId?.id != null) {
+    return `${API_BASE}/titles/${itemOrId.id}/?format=json`;
+  }
+  if (itemOrId != null) {
+    return `${API_BASE}/titles/${itemOrId}/?format=json`;
+  }
+  throw new Error('detailUrlFrom: cannot resolve URL');
 }
 
-// 1) get top-1 list item  2) fetch its detail  3) return both
-export async function fetchBestMovie({ signal } = {}) {
-  const listUrl = `${API_BASE}/titles/?sort_by=-imdb_score,-votes&page_size=1`;
-  const data = await getJSON(listUrl, { signal });
-
-  const summary = Array.isArray(data?.results) ? data.results[0] : data?.[0];
-  if (!summary) throw new Error("No movie found.");
-
-  let detailUrl = detailUrlFromItem(summary);
-  // Ensure JSON (your API already honors Accept header, this is extra-safe)
-  if (!detailUrl.includes("?")) detailUrl += "?format=json";
-
-  const detail = await getJSON(detailUrl, { signal });
-  return { summary, detail };
+// Top-rated list (sorted by imdb_score, then votes).
+export function topRated({ limit = 12, page = 1 } = {}) {
+  const url = `${API_BASE}/titles/?sort_by=-imdb_score,-votes&page_size=${limit}&page=${page}`;
+  return getJSON(url);
 }
+
+// Movie detail by id OR by passing a list item object.
+export function movieDetail(itemOrId, { signal } = {}) {
+  return getJSON(detailUrlFrom(itemOrId), { signal });
+}
+
+// Get description for an item: inline if present, else fetch detail.
+export async function descriptionFor(item, { signal } = {}) {
+  const inline =
+    item?.long_description?.trim?.() ||
+    item?.description?.trim?.();
+  if (inline) return inline;
+
+  const d = await movieDetail(item, { signal });
+  return d.long_description?.trim?.() || d.description?.trim?.() || '';
+ }
