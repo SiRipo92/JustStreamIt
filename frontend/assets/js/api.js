@@ -96,7 +96,7 @@ export async function descriptionFor(item, { signal } = {}) {
   const first = sanitizeDescriptionFields(item);
   // If we already have a meaningful description, stop here.
   if (
-    first !== 'La description du film n'existe pas actuellement.' &&
+    first !== "La description du film n'exist pas actuellement." &&
     first !== 'Les données descriptives sont manquantes.'
   ) {
     return first;
