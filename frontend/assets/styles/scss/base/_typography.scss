@@ -2,18 +2,21 @@
 body { font-family: "Oswald", sans-serif; }
 
 // Header H1 next to logo
-.site-header .brand-title {
+.site-header h1.brand-title {
   font-weight: 300;
-  font-size: 40px;
   color: #fff;
   margin: 0;
+
+  @media (min-width:768px) and (max-width: 992px){
+      font-size: clamp(28px,2.2vw,40px);
+   }
 }
 
 // Section H2
 h2.section-title {
   color: var(--title-black);
   font-weight: 600;
-  font-size: 48px;
+  font-size: clamp(30px, 2.2vw, 48px);
   margin-bottom: .75rem;
 }
 
