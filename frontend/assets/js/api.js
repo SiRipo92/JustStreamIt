@@ -11,42 +11,19 @@ const PLACEHOLDER_PATTERNS = [
   /^unknown$/i,
 ];
 
-// --------------------------- Helper functions
+const norm = t => String(t ?? '').replace(/\s+/g, ' ').trim();
+const isPlaceholder = s => PLACEHOLDER_PATTERNS.some(re => re.test(s));
 
-// tiny helpers
-function norm(t) {
-  return String(t ?? '').replace(/\s+/g, ' ').trim();
+// --------------------------- Placeholder detection
+
+// Prefer long_description, else description (both normalized)
+function pickRawDescription(d) {
+  const long  = norm(d?.long_description);
+  const short = norm(d?.description);
+  return long || short || '';
 }
 
-function isMeaningful(t) {
-  const s = norm(t);
-  if (!s) return false;
-  return !PLACEHOLDER_PATTERNS.some(re => re.test(s));
-}
-
-/**
- * Returns the best human-friendly description string.
- * - Prefer a meaningful long_description, else description.
- * - If fields exist but are placeholders (like "|" / "Add a Plot »"): "Film description does not currently exist."
- * - If nothing provided at all: "Description data is missing."
- */
-export function sanitizeDescriptionFields(d) {
-  const long = d?.long_description;
-  const short = d?.description;
-
-  const anyProvided =
-    norm(long).length > 0 || norm(short).length > 0;
-
-  const good =
-    (isMeaningful(long) && norm(long)) ||
-    (isMeaningful(short) && norm(short));
-
-  if (good) return good;
-  if (anyProvided) return 'Film description does not currently exist.';
-  return 'Description data is missing.';
-}
-
-
+// --------------------------- HTTP helpers
 
 // Generic JSON fetch with basic error handling
 export async function getJSON(url, opt = {}) {
@@ -91,22 +68,45 @@ export function movieDetail(itemOrId, { signal } = {}) {
   return getJSON(detailUrlFrom(itemOrId), { signal });
 }
 
-// Get description for an item: inline if present, else fetch detail.
-export async function descriptionFor(item, { signal } = {}) {
-  const first = sanitizeDescriptionFields(item);
-  // If we already have a meaningful description, stop here.
-  if (
-    first !== "La description du film n'exist pas actuellement." &&
-    first !== 'Les données descriptives sont manquantes.'
-  ) {
-    return first;
-  }
+// --------------------------- Description APIs
 
-  // Try detail endpoint in case it has a better summary.
+// A) Best Film / grid: only return real text, else '' (no fallbacks)
+export async function meaningfulDescriptionFor(item, { signal } = {}) {
+  // Try inline first
+  const inline = pickRawDescription(item);
+  if (inline && !isPlaceholder(inline)) return inline;
+
+  // Then detail
   try {
     const d = await movieDetail(item, { signal });
-    return sanitizeDescriptionFields(d);
+    const full = pickRawDescription(d);
+    return full && !isPlaceholder(full) ? full : '';
   } catch {
-    return first;
+    return '';
   }
 }
+
+// B) Modal: return real text or friendly message
+export async function sanitizedDescriptionFor(item, { signal } = {}) {
+  const inline = pickRawDescription(item);
+  if (inline && !isPlaceholder(inline)) return inline;
+
+  try {
+    const d = await movieDetail(item, { signal });
+    const full = pickRawDescription(d);
+    if (full && !isPlaceholder(full)) return full;
+
+    // Placeholder present in data
+    return (inline || full)
+      ? "La description du film n’existe pas actuellement."
+      : "Les données descriptives sont manquantes.";
+  } catch {
+    // Could not fetch details
+    return inline
+      ? "La description du film n’existe pas actuellement."
+      : "Les données descriptives sont manquantes.";
+  }
+}
+
+// Back-compatability: keeps the old name but makes it the sanitized variant
+export const descriptionFor = sanitizedDescriptionFor;

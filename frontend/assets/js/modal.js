@@ -1,4 +1,4 @@
-import { movieDetail, descriptionFor } from './api.js';
+import { movieDetail, sanitizedDescriptionFor } from './api.js';
 import { FALLBACK_SVG_DATA, viaProxy } from './posters.js';
 
 // tiny helpers
@@ -140,9 +140,9 @@ function fillModal(detail, summaryText) {
   }
 
   // summary (both placements)
-  const safeSummary = summaryText ?? (detail?.long_description || detail?.description || '');
-  setText('mm-summary', safeSummary);
-  setText('mm-summary-inline', safeSummary);
+  const summary = summaryText ?? (detail?.long_description || detail?.description || '');
+  setText('mm-summary', summary);
+  setText('mm-summary-inline', summary);
 
   // meta block
   setText('mm-year-genres',   fmtYearGenres(detail));
@@ -160,7 +160,7 @@ function fillModal(detail, summaryText) {
 export async function openMovieModal(movieOrId) {
   try {
     const detail = await movieDetail(movieOrId);
-    const summary = await descriptionFor(detail);
+    const summary = await sanitizedDescriptionFor(detail);
     fillModal(detail, summary);
 
     const modalEl = $('movieModal');

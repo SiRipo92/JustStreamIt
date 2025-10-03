@@ -1,5 +1,5 @@
 import './config.js';
-import { topRated, descriptionFor } from './api.js';
+import { topRated, meaningfulDescriptionFor } from './api.js';
 import { FALLBACK_SVG_DATA, viaProxy } from './posters.js';   // ⬅️ use viaProxy
 import './modal.js';
 
@@ -42,7 +42,7 @@ async function pickFirstValidMovie(candidates, maxChecks = 10) {
   const n = Math.min(candidates.length, maxChecks);
   for (let i = 0; i < n; i++) {
     const m = candidates[i];
-    const blurb = await descriptionFor(m);
+    const blurb = await meaningfulDescriptionFor(m);
     if (blurb) return { movie: m, blurb };
   }
   return null;
