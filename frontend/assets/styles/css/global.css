@@ -224,6 +224,11 @@ div.film-meta .bold-film-detail {
   -o-object-position: center;
      object-position: center;
 }
+@media (min-width: 320px) {
+  #best-film .poster-box img {
+    max-height: 400px;
+  }
+}
 @media (min-width: 992px) {
   #best-film .poster-box img {
     -o-object-fit: contain;
