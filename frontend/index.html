@@ -24,7 +24,7 @@
 
         <!-- Meilleur Film Section / Best Film Section -->
         <section id="best-film" class="mb-5" aria-labelledby="best-heading">
-          <h2 id="best-heading" class="section-title my-4 my-lg-5">Meilleur film</h2>
+          <h2 id="best-heading" class="section-title my-4 my-lg-5 text-center text-md-start">Meilleur film</h2>
 
           <article class="best-block p-3 p-md-4 mt-3">
               <div class="row best-grid gx-0 align-items-stretch">
@@ -58,34 +58,35 @@
 
         <!-- Films les mieux notés (genres mélangés) / Best rated films -->
         <section>
-            <h2 class="section-title">Films les mieux notés</h2>
-            <div class="card-grid-wrapper">
-                <div class="film-card">
-                    <img class="best-ranked-film">
-                        <!-- Insert image for retrieved film with the highest rank w/ votes here -->
-                        <!-- Grid layout:
-                            - Desktop: 3 cols x 2 rows
-                            - Tablet: 2 cols x 2 rows
-                            - Mobile: 1 col x 2 rows
-                         -->
-                    </img>
-                </div>
+            <h2 class="section-title my-4 my-lg-5 text-center text-md-start">Films les mieux notés</h2>
 
-                <div class="overlay-modal">
-                    <!-- 60% black opacity, white text -->
-                    <h3 class="overlay-heading">
-                        <!-- Film title, white text, size: 24px,   -->
-                    </h3>
+            <!-- Grid (JS will populate) -->
+            <div
+               id="top-rated-grid"
+               class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3"
+               aria-live="polite"
+               aria-busy="false"
 
-                    <button class="jsi-btn jsi-btn--dark" type="button"
-                            aria-label="Afficher les détails">
-                      Détails
-                    </button>
+               data-count-collapsed-xs="2"
+               data-count-expanded-xs="6"
+               data-count-collapsed-md="4"
+               data-count-expanded-md="6"
+               data-count-lg="6"
+            >
+                <!-- JS inserts .col > .film-card here -->
+            </div>
 
-                </div>
-
-                 <button class="jsi-btn jsi-btn--toggle" type="button"
-                        aria-controls="top-rated-grid" aria-expanded="false">
+            <!-- Pagination controls -->
+            <div class="d-flex justify-content-center mt-3 d-lg-none">
+                <button
+                  id="tr-toggle"
+                  type="button"
+                  class="jsi-btn jsi-btn--toggle justify-content-center"
+                  aria-controls="top-rated-grid"
+                  aria-expanded="false"
+                  data-label-more="Voir plus"
+                  data-label-less="Voir moins"
+                >
                   Voir plus
                 </button>
             </div>
@@ -93,7 +94,7 @@
 
         <!-- Films - Genre 1 (Mystery) & no dropdown -->
         <section>
-            <h2 class="section-title">Mystery</h2>
+            <h2 class="section-title my-4 my-lg-5 text-center text-md-start">Mystery</h2>
             <div class="card-grid-wrapper">
                 <div class="film-card">
                     <image>
@@ -123,7 +124,7 @@
 
         <!-- Films - Genre 2 (Action) & no dropdown -->
         <section>
-            <h2 class="section-title">Action:</h2>
+            <h2 class="section-title my-4 my-lg-5 text-center text-md-start">Action:</h2>
             <div class="card-grid-wrapper">
                 <div class="film-card">
                     <image>
@@ -153,7 +154,7 @@
 
         <!-- Films - Sorting Frame by Category with dropdown -->
         <section>
-            <h2 class="section-title">Autres:</h2>
+            <h2 class="section-title my-4 my-lg-5 text-center text-md-start">Autres:</h2>
 
             <!-- Dropdown menu to the right of H2, showing list of genre options -->
             <div class="dropdown-menu">
