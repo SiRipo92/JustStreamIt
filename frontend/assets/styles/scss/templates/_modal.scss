@@ -1,0 +1,70 @@
+#movieModal {
+  /* Only your black border, no extra shadows/lines */
+  .modal-content.jsi-modal {
+    border: 6px solid #000 !important;
+    box-shadow: none;
+  }
+  .modal-footer { border-top: 0; }
+
+  /* Vertical spacing between sections inside the modal */
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 2vw, 20px);
+    padding: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  /* ---- HERO (TEXT + POSTER) AS GRID ---- */
+  .modal-hero {
+    /* IMPORTANT: no fixed height here */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "text"
+      "summaryInline"
+      "poster";
+    row-gap: clamp(12px, 2vw, 20px);
+  }
+
+  .text-col             { grid-area: text; min-width: 0; }
+  .modal-summary-inline { grid-area: summaryInline; }
+  .poster-col           { grid-area: poster; }
+  .text-col, .poster-col { min-width: 0; }
+
+  /* Poster box: keep the poster under control, never overflow the modal */
+  .poster-box {
+    width: 100%;
+    aspect-ratio: 227 / 334;
+    max-height: clamp(300px, 45vh, 420px);
+    background: var(--poster-bg);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-position: center;
+      object-fit: cover;
+      background: var(--poster-bg);
+    }
+  }
+
+  /* Desktop ≥ lg: two columns (text | poster). Summary and cast sit BELOW the hero */
+  @media (min-width: 992px) {
+    .modal-hero {
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+      grid-template-areas: "text poster";
+      column-gap: clamp(1rem, 3vw, 3rem);
+      align-items: start;
+    }
+
+    .text-col { display: flex; flex-direction: column; }
+    .directors-block { margin-top: auto; }
+
+    /* Show full poster but keep it inside a sensible height */
+    .poster-box { max-height: clamp(320px, 40vh, 420px); }
+    .poster-box img { object-fit: contain; }
+
+    /* Space the blocks that live under the hero */
+    .modal-summary { margin-top: clamp(12px, 2vw, 20px); }
+    .modal-cast    { margin-top: clamp(8px, 1.5vw, 16px); }
+  }
+}
