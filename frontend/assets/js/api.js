@@ -68,7 +68,50 @@ export function movieDetail(itemOrId, { signal } = {}) {
   return getJSON(detailUrlFrom(itemOrId), { signal });
 }
 
-// --------------------------- Description APIs
+// --- Genres / Categories
+
+// Gets ALL genres by following pagination until `next` is null.
+// Returns an array of { id, name }.
+export async function listAllGenres(){
+    let url = `${API_BASE}/genres/`;
+    const allGenres = [];
+
+    while (url) {
+        const page = await getJSON(url);
+        const items = Array.isArray(page?.results) ? page.results : [];
+        allGenres.push(...items);
+        url = page?.next || null;
+    }
+    return allGenres;
+}
+
+function titlesUrlByGenre({ genreName, genreId, limit = 6, page = 1, sort = '-imdb_score,-votes' }) {
+  const base = new URL(`${API_BASE}/titles/`);
+  base.searchParams.set('sort_by', sort);
+  base.searchParams.set('page_size', String(limit));
+  base.searchParams.set('page', String(page));
+
+  if (genreId != null) {
+    base.searchParams.set('genre_id', String(genreId));
+  } else if (genreName) {
+    base.searchParams.set('genre', genreName); // server must expect plain name
+  } else {
+    throw new Error('titlesUrlByGenre: provide genreName or genreId');
+  }
+  return base.toString();
+}
+
+/**
+ * Fetch top titles within a specific genre.
+ * You can pass either { genreName: "Action" } OR { genreId: 14 }.
+ * limit/page work like your other calls.
+ */
+export async function listFilmsInGenre({ genreName, genreId, limit = 6, page = 1, sort = '-imdb_score,-votes' } = {}) {
+  const url = titlesUrlByGenre({ genreName, genreId, limit, page, sort });
+  return getJSON(url);
+}
+
+// --------------------------- Description searches within a film object
 
 // A) Best Film / grid: only return real text, else '' (no fallbacks)
 export async function meaningfulDescriptionFor(item, { signal } = {}) {
@@ -110,3 +153,4 @@ export async function sanitizedDescriptionFor(item, { signal } = {}) {
 
 // Back-compatability: keeps the old name but makes it the sanitized variant
 export const descriptionFor = sanitizedDescriptionFor;
+
