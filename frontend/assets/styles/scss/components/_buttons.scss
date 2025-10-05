@@ -78,7 +78,7 @@
     border-color: vars.$overlay-btn--black;
     border-radius: vars.$btn-radius;
     padding: clamp(.45rem, 2.2vw, .75rem) clamp(.75rem, 2.2vw, 1rem);
-    font-size: clamp(14px, 2.2vw, 20px);
+    font-size: clamp(16px, 2.2vw, 20px);
     white-space: nowrap;
 
     &:hover   { filter: brightness(1.1); }

@@ -34,6 +34,7 @@ h3.best-title {
   font-weight: 200;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  min-height: fit-content;
   // three lines on phones, scale up on larger screens
   -webkit-line-clamp: 3;
   @media (min-width: 768px)  { -webkit-line-clamp: 4; }
@@ -79,7 +80,7 @@ div.film-meta{
 h3.overlay-title-sm {
   font-weight: 600;
   color: #fff;
-  font-size: clamp(16px, 3.5vw, 22px);
+  font-size: clamp(18px, 3.5vw, 22px);
   line-height: 1.15;
   margin: 0;
 
@@ -115,6 +116,3 @@ h3.overlay-title-sm {
 
   .poster-col { align-self: stretch; }
 }
-
-
-

@@ -28,7 +28,7 @@
     color: #fff;
     display: flex;
     flex-direction: column;
-    padding: clamp(1.5rem, 2vw, 3rem) clamp(2rem, 2.2vw, 4rem);
+    padding: clamp(.75rem, 2vw, 4rem) clamp(.75rem, 2.2vw, 4rem);
     z-index: 2;
     pointer-events: none;
   }
