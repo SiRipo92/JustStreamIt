@@ -33,6 +33,11 @@
 section {
     margin-top: clamp(5rem,2.2vw,8rem);
     margin-bottom: clamp(5rem,2.2vw,8rem);
+
+    @media (min-width:992){
+        margin-top: clamp(10rem, 3vw, 14rem);
+        margin-bottom: clamp(10rem, 3vw, 14rem);
+    }
 }
 
 // --- Header

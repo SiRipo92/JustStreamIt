@@ -47,7 +47,14 @@
     }
   }
 
-  /* Desktop ≥ lg: two columns (text | poster). Summary and cast sit BELOW the hero */
+  // Adds margin top to the description in mobile layout
+  @media (max-width: 992px){
+      .modal-summary-inline{
+          margin-top: 1rem;
+      }
+  }
+
+  // Desktop ≥ lg: two columns (text | poster). Summary and cast sit BELOW the hero
   @media (min-width: 992px) {
     .modal-hero {
       grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);

@@ -4,6 +4,7 @@
   --overlay-bg: rgba(0,0,0,.6);
   --title-black: #000;
   --poster-bg: #e9ecef;
+  --font-sans: "Oswald", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
 }
 
 /*!
@@ -11988,14 +11989,14 @@ textarea.form-control-lg {
   }
 }
 @font-face {
-  font-family: "Oswald", sans-serif;
-  src: url("../../../fonts/oswald-variablefont_wght-webfont.woff2") format("woff2"), url("../../../fonts/oswald-variablefont_wght-webfont.woff") format("woff");
+  font-family: "Oswald";
+  src: url("/assets/fonts/oswald-variablefont_wght-webfont.woff2") format("woff2"), url("/assets/fonts/oswald-variablefont_wght-webfont.woff") format("woff"), url("/assets/fonts/Oswald-VariableFont_wght.ttf") format("truetype");
   font-weight: 200 700;
   font-style: normal;
   font-display: swap;
 }
 body {
-  font-family: "Oswald", sans-serif;
+  font-family: "Oswald";
 }
 
 .site-header h1.brand-title {
@@ -12011,13 +12012,20 @@ body {
 
 h2.section-title {
   color: var(--title-black);
-  font-weight: 600;
+  font-weight: 700;
   font-size: clamp(30px, 2.2vw, 48px);
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+@media (min-width: 768px) {
+  h2.section-title {
+    margin: clamp(1rem, 5vw, 4rem) 0;
+    font-size: clamp(40px, 2.2vw, 60px);
+  }
 }
 
 h3.best-title {
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.1;
   font-size: clamp(30px, 4vw, 48px);
 }
@@ -12054,7 +12062,7 @@ div.film-meta .bold-film-detail {
 #mm-summary-inline {
   font-size: clamp(16px, 2.2vw, 24px);
   line-height: 1.45;
-  font-weight: 300;
+  font-weight: 200;
 }
 
 .directors-block {
@@ -12064,8 +12072,8 @@ div.film-meta .bold-film-detail {
 .directors-block .directors-label {
   font-weight: 600;
 }
-.directors-block .mm-directors {
-  font-weight: 300;
+.directors-block .director-names {
+  font-weight: 200;
 }
 
 .modal-cast .actors-label {
@@ -12075,8 +12083,8 @@ div.film-meta .bold-film-detail {
 }
 .modal-cast .mm-actors,
 .modal-cast .actors-list {
-  font-weight: 300;
-  font-size: clamp(14px, 2.2vw, 18px);
+  font-weight: 200;
+  font-size: clamp(14px, 2.2vw, 16px);
 }
 
 h3.overlay-title-sm {
@@ -12411,8 +12419,10 @@ h3.overlay-title-sm {
      object-fit: cover;
   background: var(--poster-bg);
 }
-#movieModal {
-  /* Desktop ≥ lg: two columns (text | poster). Summary and cast sit BELOW the hero */
+@media (max-width: 992px) {
+  #movieModal .modal-summary-inline {
+    margin-top: 1rem;
+  }
 }
 @media (min-width: 992px) {
   #movieModal .modal-hero {
@@ -12611,6 +12621,12 @@ h3.overlay-title-sm {
 section {
   margin-top: clamp(5rem, 2.2vw, 8rem);
   margin-bottom: clamp(5rem, 2.2vw, 8rem);
+}
+@media (min-width: 992) {
+  section {
+    margin-top: clamp(10rem, 3vw, 14rem);
+    margin-bottom: clamp(10rem, 3vw, 14rem);
+  }
 }
 
 .site-header {
