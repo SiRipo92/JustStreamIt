@@ -93,102 +93,129 @@
             </div>
         </section>
 
-        <!-- Films - Genre 1 (Mystery) & no dropdown -->
-        <section>
-            <h2 class="section-title my-4 my-lg-5 text-center text-md-start">Mystery</h2>
-            <div class="card-grid-wrapper">
-                <div class="film-card">
-                    <image>
-                        <!-- Insert image for retrieved film with the highest rank w/ votes here -->
-                        <!-- Grid layout: same as above-->
-                    </image>
-                </div>
+        <!-- Films - Genre 1 (Crime) & no dropdown -->
+        <section id="genre-one" class="genre-section" aria-labelledby="g1-heading" data-genre="crime">
+            <h2 id="genre-one-heading" class="section-title my-4 my-lg-5 text-center text-md-start">Crime</h2>
+            <div
+               id="grid-genre-one"
+               class="genre-one row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5"
+               role="list"
+               aria-live="polite"
+               aria-busy="false"
 
-                <div class="overlay-modal">
-                    <!-- 60% black opacity, white text -->
-                    <h3 class="overlay-heading">
-                        <!-- Film title, white text, size: 24px,   -->
-                    </h3>
+               data-count-collapsed-xs="2"
+               data-count-expanded-xs="6"
+               data-count-collapsed-md="4"
+               data-count-expanded-md="6"
+               data-count-lg="6"
+            >
+                <!-- Will get filled in by js ---->
+            </div>
 
-                    <button class="jsi-btn jsi-btn--dark" type="button"
-                            aria-label="Afficher les détails">
-                      Détails
-                    </button>
-                </div>
-
-                <button class="jsi-btn jsi-btn--toggle" type="button"
-                        aria-controls="top-rated-grid" aria-expanded="false">
+             <!-- Toggle More/Less views (mobile & tablet only) -->
+            <div class="d-flex justify-content-center mt-3 d-lg-none">
+                <button
+                  id="genre-one-toggle"
+                  type="button"
+                  class="jsi-btn jsi-btn--toggle justify-content-center"
+                  aria-controls="top-rated-grid"
+                  aria-expanded="false"
+                  data-label-more="Voir plus"
+                  data-label-less="Voir moins"
+                >
                   Voir plus
                 </button>
             </div>
         </section>
 
-        <!-- Films - Genre 2 (Action) & no dropdown -->
-        <section>
-            <h2 class="section-title my-4 my-lg-5 text-center text-md-start">Action:</h2>
-            <div class="card-grid-wrapper">
-                <div class="film-card">
-                    <image>
-                        <!-- Insert image for retrieved film with the highest rank w/ votes here -->
-                        <!-- Grid layout: same as above-->
-                    </image>
-                </div>
+        <!-- Films - Genre 2 (Romance) & no dropdown -->
+        <section id="genre-two" class="genre-section" aria-labelledby="g2-heading" data-genre="romance">
+            <h2 class="section-title my-4 my-lg-5 text-center text-md-start">Romance</h2>
+            <div
+               id="grid-genre-two"
+               class="genre-two row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5"
+               role="list"
+               aria-live="polite"
+               aria-busy="false"
 
-                <div class="overlay-modal">
-                    <!-- 60% black opacity, white text -->
-                    <h3 class="overlay-heading">
-                        <!-- Film title, white text, size: 24px,   -->
-                    </h3>
+               data-count-collapsed-xs="2"
+               data-count-expanded-xs="6"
+               data-count-collapsed-md="4"
+               data-count-expanded-md="6"
+               data-count-lg="6"
+            >
+                <!-- Will get filled in by js ---->
+            </div>
 
-                    <button class="jsi-btn jsi-btn--dark" type="button"
-                            aria-label="Afficher les détails">
-                      Détails
-                    </button>
-                </div>
-
-                 <button class="jsi-btn jsi-btn--toggle" type="button"
-                        aria-controls="top-rated-grid" aria-expanded="false">
+             <!-- Toggle More/Less views (mobile & tablet only) -->
+            <div class="d-flex justify-content-center mt-3 d-lg-none">
+                <button
+                  id="genre-two-toggle"
+                  type="button"
+                  class="jsi-btn jsi-btn--toggle justify-content-center"
+                  aria-controls="top-rated-grid"
+                  aria-expanded="false"
+                  data-label-more="Voir plus"
+                  data-label-less="Voir moins"
+                >
                   Voir plus
                 </button>
             </div>
         </section>
 
         <!-- Films - Sorting Frame by Category with dropdown -->
-        <section>
-            <h2 class="section-title my-4 my-lg-5 text-center text-md-start">Autres:</h2>
+        <section id="filtered-genres" class="genre-section" aria-labelledby="autres-heading">
+          <div class="wrapper-w-dropdown my-4 my-lg-5 d-md-flex align-items-center gap-3">
+            <h2 id="autres-heading" class="section-title text-center text-md-start m-0">Autres :</h2>
 
-            <!-- Dropdown menu to the right of H2, showing list of genre options -->
-            <div class="dropdown-menu">
-                <ul class="genres-list">
-                    <li class="genre-option"><!--Option 1 --></li>
-                </ul>
-            </div>
-
-            <div class="card-grid-wrapper">
-                <div class="film-card">
-                    <image>
-                        <!-- Insert image for retrieved film with the highest rank w/ votes here -->
-                        <!-- Grid layout: same as above-->
-                    </image>
-                </div>
-
-                <div class="overlay-modal">
-                    <!-- 60% black opacity, white text -->
-                    <h3 class="overlay-heading">
-                        <!-- Film title, white text, size: 24px,   -->
-                    </h3>
-
-                    <button class="jsi-btn jsi-btn--dark" type="button"
-                            aria-label="Afficher les détails">
-                      Détails
-                    </button>
-                </div>
-
-                <button class="jsi-btn jsi-btn--toggle" type="button"
-                        aria-controls="top-rated-grid" aria-expanded="false">
-                  Voir plus
+            <!-- Custom dropdown: centered on mobile, right-aligned on md+ -->
+            <div class="dropdown-box w-md-auto mt-3 mt-md-0 d-flex">
+              <div id="autres-dd" class="autres-dd" data-open="false">
+                <button
+                  id="autres-dd-button"
+                  type="button"
+                  class="dd-button"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                  aria-controls="autres-menu"
+                >
+                  <span id="autres-dd-label">Chargement…</span>
+                  <span class="caret" aria-hidden="true"></span>
                 </button>
+
+                <ul id="autres-menu" class="dd-menu" role="listbox" tabindex="-1" aria-labelledby="autres-dd-button">
+                  <!-- JS inserts <li role="option"> … </li> here -->
+                </ul>
+              </div>
             </div>
+          </div>
+
+          <div
+            id="filtered-genres-grid-wrapper"
+            class="filtered-genre row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5"
+            role="list"
+            aria-live="polite"
+            aria-busy="false"
+            data-count-collapsed-xs="2"
+            data-count-expanded-xs="6"
+            data-count-collapsed-md="4"
+            data-count-expanded-md="6"
+            data-count-lg="6"
+          ></div>
+
+          <div class="d-flex justify-content-center mt-3 d-lg-none">
+            <button
+              id="filtered-genres-toggle"
+              type="button"
+              class="jsi-btn jsi-btn--toggle justify-content-center"
+              aria-controls="filtered-genres-grid-wrapper"
+              aria-expanded="false"
+              data-label-more="Voir plus"
+              data-label-less="Voir moins"
+            >
+              Voir plus
+            </button>
+          </div>
         </section>
     </main>
 
