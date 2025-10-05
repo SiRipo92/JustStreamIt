@@ -12054,6 +12054,7 @@ div.film-meta .bold-film-detail {
 #mm-summary-inline {
   font-size: clamp(16px, 2.2vw, 24px);
   line-height: 1.45;
+  font-weight: 300;
 }
 
 .directors-block {
@@ -12062,6 +12063,9 @@ div.film-meta .bold-film-detail {
 }
 .directors-block .directors-label {
   font-weight: 600;
+}
+.directors-block .mm-directors {
+  font-weight: 300;
 }
 
 .modal-cast .actors-label {
@@ -12108,6 +12112,12 @@ h3.overlay-title-sm {
     align-self: stretch;
   }
 }
+.dd-button,
+.dropdown-box {
+  font-weight: 600;
+  font-size: clamp(16px, 3vw, 22px);
+}
+
 .jsi-btn {
   display: inline-flex;
   align-items: center;
@@ -12251,11 +12261,6 @@ h3.overlay-title-sm {
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
-}
-@media (min-width: 320px) {
-  #best-film .poster-box img {
-    max-height: 450px;
-  }
 }
 @media (min-width: 992px) {
   #best-film .poster-box img {
@@ -12491,6 +12496,107 @@ h3.overlay-title-sm {
   .film-card:hover .film-overlay {
     background: rgba(0, 0, 0, 0.6);
   }
+}
+
+#filtered-genres .dropdown-box {
+  justify-self: center;
+}
+#filtered-genres .autres-dd {
+  position: relative;
+  width: 100%;
+  width: calc(150px + 1vw);
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  #filtered-genres .autres-dd {
+    width: calc(200px + 10vw);
+    margin-left: calc(50px + 3vw);
+  }
+}
+#filtered-genres .dd-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #fff;
+  border: 1px solid #000;
+  line-height: 1.25;
+}
+#filtered-genres .dd-button .caret {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #000;
+}
+#filtered-genres .dd-menu {
+  position: absolute;
+  top: calc(100% + 2px);
+  right: auto;
+  left: 0;
+  z-index: 1100;
+  min-width: 100%;
+  max-width: -moz-max-content;
+  max-width: max-content;
+  background: #fff;
+  border: 1px solid #000;
+  max-height: 50vh;
+  overflow: auto;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  display: none;
+}
+#filtered-genres {
+  /* Open state toggles */
+}
+#filtered-genres .autres-dd[data-open=true] .dd-menu {
+  display: block;
+}
+#filtered-genres .autres-dd[data-open=true] .dd-button {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+#filtered-genres ul {
+  padding-left: 0;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
+#filtered-genres .dd-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.25rem 0.5rem 0.5rem 1rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  white-space: nowrap;
+}
+@media (min-width: 450px) {
+  #filtered-genres .dd-item {
+    padding: 0.75rem 0.5rem 0.75rem 2.5rem;
+  }
+}
+#filtered-genres .dd-menu > .dd-item:not(:last-child) {
+  border-bottom: 2px solid #000;
+}
+#filtered-genres .dd-item:hover,
+#filtered-genres .dd-item[aria-selected=true] {
+  background: #f3f3f3;
+}
+#filtered-genres .dd-item-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#filtered-genres .dd-check {
+  opacity: 0;
+  margin-left: 0.5rem;
+}
+#filtered-genres .dd-item.is-selected .dd-check {
+  opacity: 1;
+  color: #16a34a;
 }
 
 .site-wrap {

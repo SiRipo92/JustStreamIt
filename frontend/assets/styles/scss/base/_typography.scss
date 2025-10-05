@@ -53,6 +53,7 @@ div.film-meta{
 #mm-summary-inline {
   font-size: clamp(16px, 2.2vw, 24px);
   line-height: 1.45;
+  font-weight: 300;
 }
 
 .directors-block{
@@ -60,6 +61,9 @@ div.film-meta{
   font-size: clamp(14px, 2.2vw, 22px);
   .directors-label{
     font-weight: 600;
+  }
+  .mm-directors{
+     font-weight: 300;
   }
 }
 
@@ -115,4 +119,11 @@ h3.overlay-title-sm {
   }
 
   .poster-col { align-self: stretch; }
+}
+
+// Dropdown
+.dd-button,
+.dropdown-box {
+    font-weight: 600;
+    font-size: clamp(16px, 3vw, 22px);
 }

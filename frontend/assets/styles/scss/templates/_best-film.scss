@@ -30,8 +30,6 @@
       object-fit: cover;
       object-position: center;
 
-      @media (min-width: 320px) { max-height: 450px; }
-
       @media (min-width: 992px) {
         object-fit: contain;
         object-position: center;
