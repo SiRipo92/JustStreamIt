@@ -51,7 +51,7 @@
     display: none;
   }
 
-  /* Open state toggles */
+  // Open state toggles
   .autres-dd[data-open="true"] .dd-menu { display: block; }
   .autres-dd[data-open="true"] .dd-button { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
 

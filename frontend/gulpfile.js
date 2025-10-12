@@ -2,6 +2,8 @@ const { src, dest, watch, series } = require("gulp");
 const sass = require("gulp-sass")(require("sass"));
 const sourcemaps = require("gulp-sourcemaps");
 const postcss = require("gulp-postcss");
+const rename = require("gulp-rename");
+const cssnano = require("cssnano");
 const autoprefixer = require("autoprefixer");
 const browserSync = require("browser-sync").create();
 const path = require("path");
@@ -76,8 +78,18 @@ function stylesBuild() {
         includePaths: [path.resolve(__dirname, "node_modules")],
       }).on("error", sass.logError)
     )
-    .pipe(postcss([autoprefixer()]))
+    .pipe(postcss([autoprefixer(), cssnano()]))
+    .pipe(rename({ suffix: ".min" }))
     .pipe(dest(paths.cssOut));
+}
+
+// No watch and no maps
+function serveProd() {
+  browserSync.init({
+    server: { baseDir: "./" },
+    port: 5501,
+    open: false,
+  });
 }
 
 function serve() {
@@ -93,5 +105,6 @@ function serve() {
 exports.clean = cleanScssArtifacts;
 exports.vendor = vendor;
 exports.dev = series(cleanScssArtifacts, vendor, stylesDev, serve);
+exports.serveProd = series(stylesBuild, serveProd);
 exports.build = series(cleanScssArtifacts, vendor, stylesBuild);
 exports.default = exports.dev;

@@ -12035,6 +12035,7 @@ h3.best-title {
   font-size: clamp(14px, 2.2vw, 28px);
   margin-bottom: 1rem;
   font-weight: 200;
+  max-width: 60ch;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   min-height: -moz-fit-content;
@@ -12095,7 +12096,7 @@ h3.overlay-title-sm {
   margin: 0;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* max two lines */
+  -webkit-line-clamp: 2;
   overflow: hidden;
 }
 
@@ -12378,11 +12379,7 @@ h3.overlay-title-sm {
   gap: clamp(12px, 2vw, 20px);
   padding: clamp(1rem, 2vw, 1.5rem);
 }
-#movieModal {
-  /* ---- HERO (TEXT + POSTER) AS GRID ---- */
-}
 #movieModal .modal-hero {
-  /* IMPORTANT: no fixed height here */
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas: "text" "summaryInline" "poster";
@@ -12400,9 +12397,6 @@ h3.overlay-title-sm {
 }
 #movieModal .text-col, #movieModal .poster-col {
   min-width: 0;
-}
-#movieModal {
-  /* Poster box: keep the poster under control, never overflow the modal */
 }
 #movieModal .poster-box {
   width: 100%;
@@ -12557,9 +12551,6 @@ h3.overlay-title-sm {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   display: none;
 }
-#filtered-genres {
-  /* Open state toggles */
-}
 #filtered-genres .autres-dd[data-open=true] .dd-menu {
   display: block;
 }
@@ -12622,7 +12613,7 @@ section {
   margin-top: clamp(5rem, 2.2vw, 8rem);
   margin-bottom: clamp(5rem, 2.2vw, 8rem);
 }
-@media (min-width: 992) {
+@media (min-width: 992px) {
   section {
     margin-top: clamp(10rem, 3vw, 14rem);
     margin-bottom: clamp(10rem, 3vw, 14rem);

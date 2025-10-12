@@ -14,9 +14,8 @@
     padding: clamp(1rem, 2vw, 1.5rem);
   }
 
-  /* ---- HERO (TEXT + POSTER) AS GRID ---- */
+  // ---- HERO (TEXT + POSTER) AS GRID ----
   .modal-hero {
-    /* IMPORTANT: no fixed height here */
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -31,7 +30,7 @@
   .poster-col           { grid-area: poster; }
   .text-col, .poster-col { min-width: 0; }
 
-  /* Poster box: keep the poster under control, never overflow the modal */
+  // Poster box: keep the poster under control, never overflow the modal
   .poster-box {
     width: 100%;
     aspect-ratio: 227 / 334;

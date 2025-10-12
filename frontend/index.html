@@ -1,17 +1,20 @@
 <!doctype html>
 <html lang="fr">
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="api-base" content="http://localhost:8000/api/v1">
         <title>JustStreamIt</title>
+        <meta name="description"
+        content="JustStreamIt : découvrez le meilleur film du moment, les titres les mieux notés et explorez les catégories de films avec affiches et fiches détaillées.">
+        <meta name="robots" content="index,follow">
         <link rel="preload" href="/assets/fonts/oswald-variablefont_wght-webfont.woff2" as="font" type="font/woff2" crossorigin>
-        <link rel="stylesheet" href="assets/styles/css/global.css">
+        <link rel="stylesheet" href="assets/styles/css/global.min.css">
     </head>
 
     <body>
     <!-- Logo and H1 tag -->
-    <header class="site-wrap container-fluid site-header py-3" role="banner">
+    <header class="site-wrap container-fluid site-header py-3">
       <div class="d-flex align-items-center
                   justify-content-center justify-content-md-start
                   gap-2 gap-md-5 ps-3 ps-md-4">
@@ -20,7 +23,7 @@
       </div>
     </header>
 
-    <main class="site-wrap container-fluid my-4" role="main">
+    <main class="site-wrap container-fluid my-4">
 
         <!-- Meilleur Film Section / Best Film Section -->
         <section id="best-film" class="mb-5" aria-labelledby="best-heading">
@@ -31,13 +34,15 @@
                 <!-- 12 / 5 / 4 -->
                 <div class="col-12 col-md-4 ">
                   <figure class="poster-box m-0">
-                    <img id="best-img" class="d-block w-100" src="" alt="" loading="eager" referrerpolicy="no-referrer">
+                    <img id="best-img" class="d-block w-100" src="/assets/img/placeholder.svg" alt="" width="600" height="900" decoding="async" fetchpriority="high" loading="eager" referrerpolicy="no-referrer">
                   </figure>
                 </div>
 
-                <!-- 12 / 6 / 7  => sums to 11 at md+lg -->
+               <!-- 12 / 6 / 7  => sums to 11 at md+lg -->
                <div class="col-12 col-md-7 best-textcol">
-                  <h3 id="best-title" class="best-title my-2"></h3>
+                  <h3 id="best-title" class="best-title my-2">
+                      <span class="visually-hidden">Titre en cours de chargement</span>
+                  </h3>
                   <p  id="best-desc"  class="best-desc text-muted mb-3"></p>
 
                   <div class="best-cta text-center text-lg-end">
@@ -94,7 +99,7 @@
         </section>
 
         <!-- Films - Genre 1 (Crime) & no dropdown -->
-        <section id="genre-one" class="genre-section" aria-labelledby="g1-heading" data-genre="crime">
+        <section id="genre-one" class="genre-section" aria-labelledby="genre-one-heading" data-genre="crime">
             <h2 id="genre-one-heading" class="section-title my-4 my-lg-5 text-center text-md-start">Crime</h2>
             <div
                id="grid-genre-one"
@@ -109,10 +114,10 @@
                data-count-expanded-md="6"
                data-count-lg="6"
             >
-                <!-- Will get filled in by js ---->
+                <!-- Will get filled in by JS -->
             </div>
 
-             <!-- Toggle More/Less views (mobile & tablet only) -->
+            <!-- Toggle More/Less views (mobile & tablet only) -->
             <div class="d-flex justify-content-center mt-3 d-lg-none">
                 <button
                   id="genre-one-toggle"
@@ -129,8 +134,8 @@
         </section>
 
         <!-- Films - Genre 2 (Romance) & no dropdown -->
-        <section id="genre-two" class="genre-section" aria-labelledby="g2-heading" data-genre="romance">
-            <h2 class="section-title my-4 my-lg-5 text-center text-md-start">Romance</h2>
+        <section id="genre-two" class="genre-section" aria-labelledby="genre-two-heading" data-genre="romance">
+            <h2 id="genre-two-heading" class="section-title my-4 my-lg-5 text-center text-md-start">Romance</h2>
             <div
                id="grid-genre-two"
                class="genre-two row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5"
@@ -144,10 +149,10 @@
                data-count-expanded-md="6"
                data-count-lg="6"
             >
-                <!-- Will get filled in by js ---->
+                <!-- Will get filled in by JS -->
             </div>
 
-             <!-- Toggle More/Less views (mobile & tablet only) -->
+            <!-- Toggle More/Less views (mobile & tablet only) -->
             <div class="d-flex justify-content-center mt-3 d-lg-none">
                 <button
                   id="genre-two-toggle"
@@ -228,7 +233,9 @@
             <div class="modal-hero">
               <!-- Text column -->
               <div class="text-col d-flex flex-column">
-                <h3 id="movieModalTitle" class="best-title mb-3"></h3>
+                <h3 id="movieModalTitle" class="best-title mb-3">
+                    <span class="visually-hidden">Titre en cours de chargement</span>
+                </h3>
 
                 <div class="film-meta">
                   <p id="mm-year-genres" class="bold-film-detail mb-1"></p>
@@ -256,7 +263,7 @@
               <!-- Poster column -->
               <div class="poster-col">
                 <figure class="poster-box m-0 h-100">
-                  <img id="mm-poster" class="d-block w-100 h-100" alt="" referrerpolicy="no-referrer">
+                  <img id="mm-poster" src="/assets/img/placeholder.svg" class="d-block w-100 h-100" alt="" referrerpolicy="no-referrer">
                 </figure>
               </div>
             </div>

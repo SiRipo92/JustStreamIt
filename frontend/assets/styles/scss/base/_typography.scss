@@ -22,7 +22,7 @@ h2.section-title {
 
   @media (min-width:768px){
       margin: clamp(1rem, 5vw, 4rem) 0;
-      font-size: clamp(40px, 2.2vw, 60px);g
+      font-size: clamp(40px, 2.2vw, 60px);
   }
 }
 
@@ -38,6 +38,7 @@ h3.best-title {
   font-size: clamp(14px, 2.2vw, 28px);
   margin-bottom: 1rem;
   font-weight: 200;
+  max-width: 60ch;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   min-height: fit-content;
@@ -96,7 +97,7 @@ h3.overlay-title-sm {
 
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* max two lines */
+  -webkit-line-clamp: 2;
   overflow: hidden;
 }
 
