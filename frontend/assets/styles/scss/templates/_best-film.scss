@@ -29,12 +29,8 @@
       height: auto;
       object-fit: cover;
       object-position: center;
+      background: #fff;
 
-      @media (min-width: 992px) {
-        object-fit: contain;
-        object-position: center;
-        background: var(--poster-bg);
-      }
     }
 
     @media (min-width: 768px) {

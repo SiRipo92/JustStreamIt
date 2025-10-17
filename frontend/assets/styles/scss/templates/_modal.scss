@@ -1,12 +1,10 @@
 #movieModal {
-  /* Only your black border, no extra shadows/lines */
   .modal-content.jsi-modal {
     border: 6px solid #000 !important;
     box-shadow: none;
   }
   .modal-footer { border-top: 0; }
 
-  /* Vertical spacing between sections inside the modal */
   .modal-body {
     display: flex;
     flex-direction: column;
@@ -30,19 +28,19 @@
   .poster-col           { grid-area: poster; }
   .text-col, .poster-col { min-width: 0; }
 
-  // Poster box: keep the poster under control, never overflow the modal
+  // Poster box
   .poster-box {
     width: 100%;
     aspect-ratio: 227 / 334;
     max-height: clamp(300px, 45vh, 420px);
-    background: var(--poster-bg);
+    background: #fff !important;
 
     img {
       width: 100%;
       height: 100%;
       object-position: center;
       object-fit: cover;
-      background: var(--poster-bg);
+      background: #fff !important;
     }
   }
 
@@ -67,7 +65,7 @@
 
     /* Show full poster but keep it inside a sensible height */
     .poster-box { max-height: clamp(320px, 40vh, 420px); }
-    .poster-box img { object-fit: contain; }
+    .poster-box img { object-fit: cover; }
 
     /* Space the blocks that live under the hero */
     .modal-summary { margin-top: clamp(12px, 2vw, 20px); }

@@ -12270,15 +12270,7 @@ h3.overlay-title-sm {
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
-}
-@media (min-width: 992px) {
-  #best-film .poster-box img {
-    -o-object-fit: contain;
-       object-fit: contain;
-    -o-object-position: center;
-       object-position: center;
-    background: var(--poster-bg);
-  }
+  background: #fff;
 }
 @media (min-width: 768px) {
   #best-film .poster-box {
@@ -12360,18 +12352,12 @@ h3.overlay-title-sm {
   line-height: 1.4;
 }
 
-#movieModal {
-  /* Only your black border, no extra shadows/lines */
-}
 #movieModal .modal-content.jsi-modal {
   border: 6px solid #000 !important;
   box-shadow: none;
 }
 #movieModal .modal-footer {
   border-top: 0;
-}
-#movieModal {
-  /* Vertical spacing between sections inside the modal */
 }
 #movieModal .modal-body {
   display: flex;
@@ -12402,7 +12388,7 @@ h3.overlay-title-sm {
   width: 100%;
   aspect-ratio: 227/334;
   max-height: clamp(300px, 45vh, 420px);
-  background: var(--poster-bg);
+  background: #fff !important;
 }
 #movieModal .poster-box img {
   width: 100%;
@@ -12411,7 +12397,7 @@ h3.overlay-title-sm {
      object-position: center;
   -o-object-fit: cover;
      object-fit: cover;
-  background: var(--poster-bg);
+  background: #fff !important;
 }
 @media (max-width: 992px) {
   #movieModal .modal-summary-inline {
@@ -12440,8 +12426,8 @@ h3.overlay-title-sm {
     max-height: clamp(320px, 40vh, 420px);
   }
   #movieModal .poster-box img {
-    -o-object-fit: contain;
-       object-fit: contain;
+    -o-object-fit: cover;
+       object-fit: cover;
   }
   #movieModal {
     /* Space the blocks that live under the hero */
