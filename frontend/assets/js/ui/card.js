@@ -1,4 +1,4 @@
-import { FALLBACK_SVG_DATA, viaProxy } from '../posters.js';
+import { FALLBACK_URL, viaProxy, rememberPoster, getCachedPoster } from '../posters.js';
 
 // Function to set the HTML for a top-rated card to be inserted in the grid
 export function buildCard(item){
@@ -12,7 +12,7 @@ export function buildCard(item){
         <img
           class="poster-img d-block w-100 h-100"
           alt="${item.title ? `Affiche de ${item.title}` : 'Affiche de film'}"
-          src="${FALLBACK_SVG_DATA}"
+          src="${FALLBACK_URL}"
           referrerpolicy="no-referrer"
         >
         <figcaption class="visually-hidden">${item.title || ''}</figcaption>
@@ -40,10 +40,43 @@ export function buildCard(item){
   `;
 
   const img = col.querySelector('img.poster-img');
-  img.src = viaProxy(item.image_url || '', item.imdb_url || '');
+  if (img) {
+    img.src = FALLBACK_URL;
+    img.src = viaProxy(item.image_url || '', item.imdb_url || '');
+
+    // When the image actually loads, cache the final URL
+    img.addEventListener('load', () => {
+      const finalUrl = img.currentSrc || img.src;
+      rememberPoster(item.id, finalUrl);
+    });
+
+    img.onerror = () => {
+      const forceImdb = viaProxy('', item.imdb_url || '');
+      const next = (img.src !== forceImdb) ? forceImdb : FALLBACK_URL;
+      img.src = next;
+      // If it loads later, the 'load' handler above will cache it.
+    };
+  }
 
   const btn = col.querySelector('.jsi-btn--overlay');
-  btn.addEventListener('click', () => window.openMovieModal?.(item));
+  if (btn) {
+    btn.addEventListener('click', () => {
+      // 1) Prefer the URL we cached on successful load
+      let posterSrc = getCachedPoster(item.id);
+
+      // 2) If not cached yet, but the <img> is already loaded, use it
+      if (!posterSrc && img && img.complete && img.naturalWidth > 0) {
+        posterSrc = img.currentSrc || img.src;
+      }
+
+      // 3) Still nothing? Build from the card data (last resort)
+      if (!posterSrc) {
+        posterSrc = viaProxy(item.image_url || '', item.imdb_url || '');
+      }
+
+      window.openMovieModal?.({ ...item, _poster_src: posterSrc });
+    });
+  }
 
   return col;
 }

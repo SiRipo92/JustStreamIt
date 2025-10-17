@@ -1,5 +1,5 @@
 import { movieDetail, sanitizedDescriptionFor } from './api.js';
-import { FALLBACK_SVG_DATA, viaProxy } from './posters.js';
+import { FALLBACK_URL, viaProxy, isBackendFallback, hasImdbParam } from './posters.js';
 
 // tiny helpers
 const $ = id => document.getElementById(id);
@@ -38,7 +38,19 @@ const GROSS_KEYS = [
   'income',
 ];
 
-//
+// Elements included inside modal
+
+
+function setPoster(imgEl, url, imdbUrl, altText) {
+  if (!imgEl) return;
+  imgEl.alt = altText || '';
+  if (url) imgEl.src = url;
+  imgEl.onerror = () => {
+    const forceImdb = viaProxy('', imdbUrl || '');
+    imgEl.src = (imgEl.src !== forceImdb) ? forceImdb : FALLBACK_URL;
+  };
+}
+
 function pickGross(detail = {}) {
   for (const k of GROSS_KEYS) {
     const v = detail[k];
@@ -127,22 +139,24 @@ function fmtGross(detail) {
 
 
 // ---- Render modal ----
-function fillModal(detail, summaryText) {
+function fillModal(detail, summaryText, initialPosterSrc) {
+  const img = document.getElementById('mm-poster');
+  setPoster(img, initialPosterSrc || FALLBACK_URL, detail?.imdb_url, detail?.title);
+  const candidate = viaProxy(detail?.image_url || '', detail?.imdb_url || '');
+
+  const canUpgrade =
+    candidate &&
+    img &&
+    img.src !== candidate &&
+    !isBackendFallback(candidate) &&
+    (hasImdbParam(candidate) || isBackendFallback(img.src));
+  if (canUpgrade) {
+    img.src = candidate;
+  }
+
+
   // title
   setText('movieModalTitle', detail?.title || '');
-
-  // poster (always returns 200; real jpeg or inline SVG fallback)
-  const img = $('mm-poster');
-  if (img) {
-      img.alt = detail?.title || '';
-      img.src = FALLBACK_SVG_DATA; // valeur de départ visible
-      img.src = viaProxy(detail?.image_url || '', detail?.imdb_url || '');
-
-      img.onerror = () => {
-        const forceImdb = viaProxy('', detail?.imdb_url || '');
-        if (img.src !== forceImdb) img.src = forceImdb;
-      };
-    }
 
   // summary (both placements)
   const summary = summaryText ?? (detail?.long_description || detail?.description || '');
@@ -164,9 +178,13 @@ function fillModal(detail, summaryText) {
 // ---- Public facing API
 export async function openMovieModal(movieOrId) {
   try {
+    const initialPosterSrc = movieOrId?._poster_src || '';
+    const img = document.getElementById('mm-poster');
+    if (img) setPoster(img, initialPosterSrc || FALLBACK_URL, movieOrId?.imdb_url, movieOrId?.title);
+
     const detail = await movieDetail(movieOrId);
     const summary = await sanitizedDescriptionFor(detail);
-    fillModal(detail, summary);
+    fillModal(detail, summary, initialPosterSrc);
 
     const modalEl = $('movieModal');
     const modal = window.bootstrap?.Modal.getOrCreateInstance(modalEl, { backdrop: true });
