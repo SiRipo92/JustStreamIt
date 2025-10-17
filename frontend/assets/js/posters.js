@@ -1,6 +1,5 @@
 import { API_BASE } from './config.js';
 
-// Inline fallback SVG
 export const FALLBACK_SVG_DATA =
   'data:image/svg+xml;utf8,' +
   encodeURIComponent(
@@ -12,10 +11,11 @@ export const FALLBACK_SVG_DATA =
      </svg>`
   );
 
-// Route every poster through the backend proxy (no client-side normalize)
-export function viaProxy(remoteUrl) {
-  if (!remoteUrl || typeof remoteUrl !== 'string') return FALLBACK_SVG_DATA;
+// Always pass imdb when available
+export function viaProxy(remoteUrl, imdbUrl) {
+  if (!remoteUrl && !imdbUrl) return FALLBACK_SVG_DATA;
   const u = new URL(`${API_BASE}/titles/posters/`);
-  u.searchParams.set('url', remoteUrl);
+  if (remoteUrl) u.searchParams.set('url', remoteUrl);
+  if (imdbUrl)   u.searchParams.set('imdb', imdbUrl);
   return u.toString();
 }

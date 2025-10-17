@@ -40,7 +40,7 @@ export function buildCard(item){
   `;
 
   const img = col.querySelector('img.poster-img');
-  img.src = viaProxy(item.image_url || '');
+  img.src = viaProxy(item.image_url || '', item.imdb_url || '');
 
   const btn = col.querySelector('.jsi-btn--overlay');
   btn.addEventListener('click', () => window.openMovieModal?.(item));

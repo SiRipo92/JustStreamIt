@@ -134,10 +134,15 @@ function fillModal(detail, summaryText) {
   // poster (always returns 200; real jpeg or inline SVG fallback)
   const img = $('mm-poster');
   if (img) {
-    img.alt = detail?.title || '';
-    img.src = FALLBACK_SVG_DATA;
-    img.src = viaProxy(detail?.image_url || '');
-  }
+      img.alt = detail?.title || '';
+      img.src = FALLBACK_SVG_DATA; // valeur de départ visible
+      img.src = viaProxy(detail?.image_url || '', detail?.imdb_url || '');
+
+      img.onerror = () => {
+        const forceImdb = viaProxy('', detail?.imdb_url || '');
+        if (img.src !== forceImdb) img.src = forceImdb;
+      };
+    }
 
   // summary (both placements)
   const summary = summaryText ?? (detail?.long_description || detail?.description || '');
